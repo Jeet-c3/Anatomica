@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anatomica -> Skeletal System</title>
+  
+  <style>
+    /* 1. Reset and Canvas Background Styling */
+    body { 
+      margin: 0; 
+      padding: 0; 
+      background: #040307;
+      background-image:
+          radial-gradient(circle at 50% 35%, #1d1431 0%, transparent 65%),
+          linear-gradient(180deg, #000000 0%, #070012 100%);
+      color: white; 
+      font-family: 'Segoe UI', sans-serif; 
+      min-height: 100vh;
+      overflow-x: hidden; /* Prevent horizontal scroll from Three.js */
+    }
+
+    canvas {
+      position: fixed; /* Fixes stars to the background */
+      top: 0;
+      left: 0;
+      z-index: -1; /* Puts stars behind everything */
+      display: block;
+      pointer-events: none; /* Allows clicks to pass through to the skeleton */
+    }
+
+    /* 2. Existing Header & Layout Styles */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 5vw;
+        background: rgba(20, 20, 40, 0.45); /* Slightly more transparent */
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        position: fixed;
+        width: 100%;
+        box-sizing: border-box; /* Ensures padding doesn't break width */
+        z-index: 3000;
+        color: #fff;
+    }
+
+    header h1 {
+        font-size: clamp(20px, 5vw, 26px);
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    nav a {
+        margin-left: 24px;
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.25s;
+        cursor: pointer;
+    }
+
+    nav a:hover {
+        color: #00ffff;
+    }
+
+    #main-container { 
+      display: flex; 
+      padding: 120px 50px 50px; 
+      justify-content: center; 
+      gap: 40px; 
+      position: relative;
+      z-index: 1; /* Ensures content is above the canvas */
+    }
+    
+    .map-wrapper { 
+      position: relative; 
+      display: inline-block; 
+      /* border: 1px solid rgba(255, 255, 255, 0.1); */
+      background: transparent
+    }
+
+    #skeletal-img { 
+      display: block; 
+      width: 450px; 
+      height: auto; 
+      background-color: transparent;
+    }
+
+    #overlay-svg { 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      pointer-events: none;
+       
+    }
+    
+    .hitbox { 
+      fill: transparent; 
+      stroke: transparent; 
+      stroke-width: 2; 
+      cursor: pointer; 
+      pointer-events: auto; 
+      transition: 0.3s; 
+    }
+
+    .hitbox:hover { 
+      stroke: #00ffff; 
+      fill: rgba(0, 255, 255, 0.15); 
+    }
+
+    #info-panel { 
+      width: 380px; 
+      padding: 30px; 
+      background: rgba(255, 255, 255, 0.08); 
+      backdrop-filter: blur(10px);
+      border-radius: 15px; 
+      border: 1px solid rgba(255,255,255,0.1); 
+      height: fit-content; 
+    }
+
+    #info-panel h2 { color: #00ffff; margin-top: 0; margin-bottom: 15px; }
+    #info-panel p { line-height: 1.6; color: #ddd; }
+  
+    .explore-btn {
+            margin-top: 30px;
+            position: relative;
+            display: inline-block;
+            padding: 16px 48px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 50px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            z-index: 1;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(to right, 
+                rgba(115, 110, 255, 0.6) 0%, 
+                rgba(0, 166, 255, 0.6) 51%, 
+                rgba(216, 110, 255, 0.6) 100%);
+            background-size: 200% auto;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 
+                        inset 0 2px 5px rgba(224, 219, 219, 0.5);
+        }
+
+        .explore-btn::before { 
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50px;
+            background: conic-gradient(from var(--angle, 0deg), #ff6ef3, #9bdcff, #ff6eec);
+            opacity: 0.6;
+            filter: blur(8px);
+            animation: rotate 6s linear infinite;
+            z-index: -2;
+        }
+
+        .explore-btn:hover {
+            background-position: right center;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(224, 219, 219, 0.5), 
+                        inset 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+  </style>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <header>
+      <h1>Anatomica</h1>
+      <nav>
+          <a href="../index.html">Home</a>
+          <a href=""onclick="startGallery()">Gallery</a>
+          <a href="#">About</a>
+          <a href="#">Examination</a>
+      </nav>
+  </header>
+
+  <div id="main-container">
+    <div class="map-wrapper">
+      <img id="skeletal-img" src="../images/lable_muscular_tran.png" alt="Skeletal System">
+      
+      <svg id="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
+        <rect class="hitbox" x="100" y="35" width="160" height="45" onclick="updateInfo('Skull', 'Protects the brain and forms the structure of the face.')" />
+        <rect class="hitbox" x="75" y="97" width="180" height="40" onclick="updateInfo('Mandible', 'Lower jaw bone used for chewing and speaking.')" />
+        <rect class="hitbox" x="80" y="170" width="180" height="40" onclick="updateInfo('Clavicle', 'Collarbone connecting arm to the body.')" />
+        <rect class="hitbox" x="80" y="230" width="140" height="40" onclick="updateInfo('Ribs', 'Protect the heart and lungs.')" />
+        <rect class="hitbox" x="80" y="290" width="180" height="40" onclick="updateInfo('Sternum', 'Breastbone connecting ribs in the chest.')" />
+        <rect class="hitbox" x="10" y="345" width="280" height="72" onclick="updateInfo('Vertebral Column (Cervical)', 'Upper spine supporting the head and neck.')" />
+        <rect class="hitbox" x="80" y="420" width="180" height="40" onclick="updateInfo('Vertebral Column (Thoracic)', 'Middle spine supporting rib cage.')" />
+        <rect class="hitbox" x="80" y="470" width="180" height="40" onclick="updateInfo('Vertebral Column (Lumbar)', 'Lower spine supporting body weight.')" />
+        <rect class="hitbox" x="80" y="540" width="180" height="40" onclick="updateInfo('Pelvis', 'Supports body weight and connects spine to legs.')" />
+        <rect class="hitbox" x="105" y="670" width="140" height="45" onclick="updateInfo('Femur', 'Thigh bone, strongest bone in the body.')" />
+        <rect class="hitbox" x="80" y="750" width="180" height="40" onclick="updateInfo('Patella', 'Kneecap protecting the knee joint.')" />
+        <rect class="hitbox" x="140" y="850" width="80" height="40" onclick="updateInfo('Tibia', 'Main weight-bearing bone of lower leg.')" />
+        <rect class="hitbox" x="110" y="913" width="120" height="40" onclick="updateInfo('Fibula', 'Smaller lower leg bone aiding stability.')" />
+        <rect class="hitbox" x="630" y="190" width="160" height="40" onclick="updateInfo('Scapula', 'Shoulder blade connecting arm to torso.')" />
+        <rect class="hitbox" x="630" y="290" width="160" height="40" onclick="updateInfo('Humerus', 'Upper arm bone.')" />
+        <rect class="hitbox" x="630" y="405" width="160" height="40" onclick="updateInfo('Radius', 'Forearm bone on thumb side.')" />
+        <rect class="hitbox" x="630" y="445" width="100" height="40" onclick="updateInfo('Ulna', 'Forearm bone on pinky side.')" />
+        <rect class="hitbox" x="630" y="500" width="160" height="60" onclick="updateInfo('Carpals', 'Wrist bones allowing flexibility.')" />
+        <rect class="hitbox" x="645" y="565" width="180" height="40" onclick="updateInfo('Metacarpals', 'Bones of the palm.')" />
+        <rect class="hitbox" x="640" y="605" width="160" height="70" onclick="updateInfo('Phalanges (Hand)', 'Finger bones used for gripping.')" />
+        <rect class="hitbox" x="640" y="705" width="160" height="70" onclick="updateInfo('Sacrum & Coccyx', 'Base of spine, supports pelvis.')" />
+        <rect class="hitbox" x="640" y="960" width="160" height="70" onclick="updateInfo('Tarsals', 'Ankle bones supporting movement.')" />
+        <rect class="hitbox" x="635" y="1030" width="176" height="40" onclick="updateInfo('Metatarsals', 'Foot bones helping in walking.')" />
+        <rect class="hitbox" x="630" y="1070" width="176" height="40" onclick="updateInfo('Phalanges (Foot)', 'Toe bones aiding balance.')" />
+      </svg>
+    </div>
+
+    <div id="info-panel">
+      <h2 id="title">Select a Label</h2>
+      <p id="description">Click the cyan-bordered labels on the skeleton to see anatomical details.</p>
+    <a href="https://human.biodigital.com/viewer/?id=5HPv&ui-anatomy-descriptions=true&ui-anatomy-pronunciations=true&ui-anatomy-labels=true&ui-audio=true&ui-chapter-list=false&ui-fullscreen=true&ui-help=true&ui-info=true&ui-label-list=true&ui-layers=true&ui-loader=circle&ui-media-controls=full&ui-menu=true&ui-nav=true&ui-search=true&ui-tools=true&ui-tutorial=false&ui-undo=true&ui-whiteboard=true&initial.none=true&disable-scroll=false&dk=edac91d2443ff104ab74174b3047b00937a21960&paid=o_25ed890c" class="explore-btn">View in 3D →</a>
+
+    </div>
+  </div>
+
+  <script type="module">
+    import * as THREE from "three";
+
+    let scene, camera, renderer, stars;
+
+    init();
+    animate();
+
+    function init() {
+        scene = new THREE.Scene();
+
+        camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
+        camera.position.z = 1;
+
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        stars = createStars();
+        scene.add(stars);
+
+        window.addEventListener("resize", onResize);
+    }
+
+    function createStars() {
+        const STAR_COUNT = 7000;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(STAR_COUNT * 3);
+
+        for (let i = 0; i < STAR_COUNT; i++) {
+            const i3 = i * 3;
+            positions[i3] = (Math.random() - 0.5) * 2000;
+            positions[i3 + 1] = (Math.random() - 0.5) * 2000;
+            positions[i3 + 2] = (Math.random() - 0.5) * 2000;
+        }
+
+        geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+        const material = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 1.5,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        return new THREE.Points(geometry, material);
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        stars.rotation.y += 0.0005; 
+        renderer.render(scene, camera);
+    }
+
+    function onResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+  </script>
+
+  <script>
+    function updateInfo(name, text) {
+      document.getElementById('title').innerText = name;
+      document.getElementById('description').innerText = text;
+    }
+  </script>
+</body>
+</html>
