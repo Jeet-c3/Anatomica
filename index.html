@@ -18,7 +18,8 @@
             --c-purple: #7c4af5;
             --c-pink: #ed4f9b;
             --c-yellow: #f5c83b;
-            --c-orange: #fa7b43;
+            --c-white: hsl(0, 7%, 97%);
+            
         }
 
         * {
@@ -29,12 +30,21 @@
         }
 
         body {
-            background-color: var(--bg-body);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+    background: linear-gradient(270deg, #07AEEA, #2BF598);
+    background-size: 400% 400%;
+    animation: gradientMove 8s ease infinite;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
         .login-card {
             display: flex;
@@ -92,7 +102,7 @@
             width: 65px; height: 150px; 
             background: var(--c-pink); 
             left: 330px;
-            border-radius: 15px 15px 0 0; 
+            border-radius: 15px 15px 0 0;
             z-index: 3;
             animation: slideUp 0.7s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
         }
@@ -112,12 +122,13 @@
             z-index: 2;
             animation: slideUp 0.7s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
         }
-        .orange { 
+        .white { 
             width: 190px; height: 95px; 
-            background: var(--c-orange); 
+            background: var(--c-white); 
             left: 65px; 
             border-radius: 95px 95px 0 0; 
             z-index: 3;
+            box-shadow:1px 1px 23px  #b0b0b0;
             animation: slideUp 0.7s 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
         }
 
@@ -133,7 +144,7 @@
         .purple .eye-container { top: 40px; gap: 20px; }
         .pink .eye-container { top: 25px; gap: 12px; }
         .yellow .eye-container { top: 35px; gap: 16px; }
-        .orange .eye-container { top: 35px; gap: 35px; }
+        .white .eye-container { top: 35px; gap: 35px; }
 
         .eye { 
             width: 12px; height: 12px; 
@@ -146,7 +157,7 @@
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         
-        .orange .eye { width: 14px; height: 14px;box-shadow:1px 2px 2px #777777; }
+        .white .eye { width: 14px; height: 14px;}
         
         .pupil { 
             width: 5px; height: 5px; 
@@ -156,9 +167,9 @@
             transition: opacity 0.2s;
         }
 
-        .orange .pupil { width: 6px; height: 6px; }
+        .white .pupil { width: 6px; height: 6px; }
 
-        .orange-smile {
+        .white-smile {
             position: absolute;
             bottom: 30px;
             left: 50%;
@@ -195,13 +206,13 @@
         .is-hiding .pink { transform: translateY(140px); }
         .is-hiding .yellow { transform: translateY(150px) translateX(10px) rotate(8deg); }
         
-        .is-hiding .orange .eye { 
+        .is-hiding .white .eye { 
             height: 4px; 
             background: var(--primary); 
             border-radius: 4px;
             margin-top: 5px; 
         }
-        .is-hiding .orange .pupil { opacity: 0; }
+        .is-hiding .white .pupil { opacity: 0; }
 
         .form-side { 
             flex: 0.85; 
@@ -385,9 +396,13 @@
         }
         .purple-smile {
             position: absolute;
-            bottom: 140px;
+            bottom: 150px;
             left: 50%;
             transform: translateX(-50%);
+            width: 12px;
+            height: 6px;
+            border-bottom: 2.5px solid black;
+            border-radius: 50%;
         }
         .cute{
             position: absolute;
@@ -395,8 +410,7 @@
             left: 90%;
             transform: translateX(-50%);
         }
-        .orangei-smile{
-            
+        .whitei-smile{
             position: absolute;
             bottom: 20px;
             left: 50%;
@@ -416,7 +430,7 @@
         .pink .eye { animation-delay: 1.5s; }
         .yellow .eye { animation-delay: 0.7s; }
         .black .eye { animation-delay: 2.1s; }
-        .orange .eye { animation-delay: 0.5s; }
+        .white .eye { animation-delay: 0.5s; }
 
         @keyframes bob {
             0%, 100% { margin-top: 0; }
@@ -425,7 +439,7 @@
 
         .eye-container, 
         .yellow-smile, .pink-smile, .black-smile, 
-        .purple-smile, .orangei-smile, .cute, 
+        .purple-smile, .whitei-smile, .cute, 
         .lens, .lensi, .danda, .dandi {
             animation: bob 3s infinite ease-in-out;
         }
@@ -442,7 +456,7 @@
             opacity: 0;
         }
 
-        .is-closed-eyes .orange .eye {
+        .is-closed-eyes .white .eye {
             box-shadow: none;   
         }
 
@@ -480,21 +494,168 @@
             background: #e11d48;
             border-radius: 5px 5px 0 0;
         }
+        .white-half{
+            background: #111111;
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 191px;
+            height: 20px;
+            border-top: 2.5px solid black;
+            box-shadow:0px -10px 5px #111111;
+        }
+
+        .panda{
+            position: absolute;        
+            width: 28px; 
+            height: 28px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 0, 0,1); 
+            box-shadow:0px 0px 6px 10px black;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .white .eare-container {
+            position: relative;
+            top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px; 
+        }
+        .white .lens-left {
+            left: 11px;
+        }
+        
+        .white .lens-right {
+            right: 11px;
+        }
+
+        .white .eye-container {                 
+            top: 25px; 
+            gap: 32px; 
+        }
+
+        .white .eye { 
+            width: 36px !important; 
+            height: 42px !important; 
+            background: #000000 !important; 
+            border-radius: 55% 45%  55% 45%  !important; 
+            box-shadow:0px 0px 5px #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .white .eye:nth-child(1) {
+            transform: rotate(-12deg);
+        }
+        .white .eye:nth-child(2) {
+            transform: rotate(12deg);
+            border-radius:  45% 55%  45% 55% !important; 
+        }
+
+        .white .pupil { 
+            width: 14px !important; 
+            height: 14px !important; 
+            background: white !important; 
+            border-radius: 50% !important;
+            position: relative !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1 !important;
+        }
+
+        .white .pupil::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #111111;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .is-hiding .white .eye,
+        .is-closed-eyes .white .eye { 
+            height: 44px !important; 
+            background: #111111 !important; 
+            margin-top: 0 !important; 
+        }
+
+        .is-hiding .white .pupil,
+        .is-closed-eyes .white .pupil { 
+            height: 4px !important; 
+            border-radius: 2px !important;
+            background: white !important;
+            opacity: 1 !important;
+        }
+
+        .is-hiding .white .pupil::after,
+        .is-closed-eyes .white .pupil::after {
+            display: none; 
+        }
+
+        .purple .cap {
+            position: absolute;
+            top: -12px; 
+            left: -3px; 
+            width: 100px;
+            height: 47px;
+            background: rgb(65, 42, 0); 
+            border-radius: 30px 30px 0 0; 
+            z-index: 15;
+        }
+
+      
+
+        .purple .cap::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 5px;
+            border-radius: 5px 5px 0 0;
+        }
+        .cap-V{
+            position: absolute;
+            top: 30px;
+            left: 35px;
+            background: var(--c-purple);
+            width: 30px;
+            height: 20px;
+            border-radius: 30px 30px 0 0; 
+        }
     </style>
 </head>
 <body>
 
 <div class="login-card">
     <div class="illustration-side" id="illustration">
+        
+        
+        <!-- balu dalu -->
         <div class="char-container">
             <div class="char purple">
+                <div class="cap">
+                    <!-- <div class="cap-brim"></div> -->
+                    <div class="cap-V"></div>
+                </div>
+
                 <div class="eye-container">
                     <div class="eye"><div class="pupil"></div></div>
                     <div class="eye"><div class="pupil"></div></div>
                 </div>
-                <div class="purple-smile">👄</div>
+                
+                <div class="purple-smile"></div>
             </div>
            
+           
+            <!-- pinku -->
             <div class="char pink">
             <div class="cute">🎀</div>
                 <div class="eye-container">
@@ -524,6 +685,11 @@
                         <div class="eye"><div class="pupil"></div></div>
                     </div>
             </div>
+
+
+
+
+                    <!-- copy boy -->
             <div class="char yellow">
     <div class="cap">
         <div class="cap-brim"></div>
@@ -536,16 +702,25 @@
     <div class="yellow-smile"></div>
 </div>
             
-            <div class="char orange">
+
+
+                        <!-- luuluuuu  -->
+            <div class="char white">
                 <div class="eye-container">
                     <div class="eye"><div class="pupil"></div></div>
                     <div class="eye"><div class="pupil"></div></div>
                 </div>
-                <div class="orange-smile"></div>
-
+                <div class="eare-container">
+            <div class="panda lens-left"></div>
+                <div class="panda lens-right"></div>        
+                </div>
+                <div class="white-smile"></div>
+                <div class="white-half"></div>
             </div>
         </div>
     </div>
+
+
 
     <form class="form-side" id="loginForm">
         <div class="logo">
