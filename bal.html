@@ -30,20 +30,21 @@
         }
 
         body {
-            background: linear-gradient(270deg, #07AEEA, #2BF598);
-            background-size: 400% 400%;
-            animation: gradientMove 8s ease infinite;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+    background: linear-gradient(270deg, #07AEEA, #2BF598);
+    background-size: 400% 400%;
+    animation: gradientMove 8s ease infinite;
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
         .login-card {
             display: flex;
@@ -62,13 +63,13 @@
         }
 
         .illustration-side {
-            flex: 1.15;
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            overflow: hidden;
-        }
+    flex: 1.15;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+}
 
         .char-container {
             position: relative;
@@ -344,8 +345,13 @@
             z-index: 11;
         }
         
-        .pink .lens-left { left: 4px; }
-        .pink .lens-right { right: 4px; }
+        .pink .lens-left {
+            left: 4px;
+        }
+        
+        .pink .lens-right {
+            right: 4px;
+        }
 
         .lensi {
             position: absolute;
@@ -369,8 +375,13 @@
             z-index: 11;
         }
         
-        .black .lens-left { left: 13px; }
-        .black .lens-right { right: 13px; }
+        .black .lens-left {
+            left: 13px;
+        }
+        
+        .black .lens-right {
+            right: 13px;
+        }
 
         .black-smile {
             position: absolute;
@@ -410,7 +421,9 @@
             1% { transform: scaleY(0.1); }
         }
 
-        .eye { animation: blink 4s infinite ease-in-out; }
+        .eye { 
+            animation: blink 4s infinite ease-in-out; 
+        }
 
         .purple .eye { animation-delay: 0.2s; }
         .pink .eye { animation-delay: 1.5s; }
@@ -438,9 +451,13 @@
             animation: none;
         }
 
-        .is-closed-eyes .pupil { opacity: 0; }
+        .is-closed-eyes .pupil {
+            opacity: 0;
+        }
 
-        .is-closed-eyes .white .eye { box-shadow: none; }
+        .is-closed-eyes .white .eye {
+            box-shadow: none;   
+        }
 
         .yellow .cap {
             position: absolute;
@@ -507,8 +524,13 @@
             align-items: center;
             gap: 6px; 
         }
-        .white .lens-left { left: 11px; }
-        .white .lens-right { right: 11px; }
+        .white .lens-left {
+            left: 11px;
+        }
+        
+        .white .lens-right {
+            right: 11px;
+        }
 
         .white .eye-container {                 
             top: 25px; 
@@ -526,7 +548,9 @@
             align-items: center;
         }
 
-        .white .eye:nth-child(1) { transform: rotate(-12deg); }
+        .white .eye:nth-child(1) {
+            transform: rotate(-12deg);
+        }
         .white .eye:nth-child(2) {
             transform: rotate(12deg);
             border-radius:  45% 55%  45% 55% !important; 
@@ -569,7 +593,9 @@
         }
 
         .is-hiding .white .pupil::after,
-        .is-closed-eyes .white .pupil::after { display: none; }
+        .is-closed-eyes .white .pupil::after {
+            display: none; 
+        }
 
         .purple .cap {
             position: absolute;
@@ -581,6 +607,8 @@
             border-radius: 30px 30px 0 0; 
             z-index: 15;
         }
+
+      
 
         .purple .cap::after {
             content: '';
@@ -655,43 +683,30 @@
             animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) backwards !important;
         }
 
-        /* --- NEW COWBOY HAT FOR THE BLACK CHARACTER --- */
-        .black .cowboy-hat {
+        .black
+        
+        .cap {
             position: absolute;
-            top: -26px; 
-            left: 50%;
-            transform: translateX(-50%);
-            width: 52px;
-            height: 38px;
-            background: #8B4513; 
+            top: -12px; 
+            left: -3px; 
+            width: 80px;
+            height: 47px;
+            background: rgb(65, 42, 0); 
             border-radius: 30px 30px 0 0; 
             z-index: 15;
-            box-shadow: inset 0 8px 0 -3px #6b340e; /* Gives the dented top look */
         }
 
-        .black .cowboy-hat::before {
+      
+
+        .black .cap::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            top: -4px;
             left: 50%;
             transform: translateX(-50%);
-            width: 105px;
-            height: 22px;
-            background: #8B4513;
-            border-radius: 50%;
-            z-index: -1; 
-            box-shadow: 0 4px 5px rgba(0,0,0,0.1);
-        }
-
-        .black .cowboy-hat::after {
-            content: '';
-            position: absolute;
-            bottom: 4px;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: #3e1f06; /* Dark brown hatband */
-            border-radius: 2px;
+            width: 10px;
+            height: 5px;
+            border-radius: 5px 5px 0 0;
         }
         
     </style>
@@ -701,16 +716,17 @@
 <div class="login-card">
     <div class="illustration-side" id="illustration">
         <div class="blossom-container">
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-        </div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+</div>
         
+        <!-- balu dalu -->
         <div class="char-container">
             <div class="char purple">
                 <div class="cap">
@@ -726,6 +742,7 @@
             </div>
            
            
+            <!-- pinku -->
             <div class="char pink">
             <div class="cute">🎀</div>
                 <div class="eye-container">
@@ -741,7 +758,9 @@
     </div>
 
             <div class="char black">
-                <div class="cowboy-hat"></div>
+
+                <div class="cap">
+                </div>
 
                 <div class="eye-container">
                     <div class="eye"><div class="pupil"></div></div>
@@ -752,12 +771,17 @@
                 <div class="lensi lens-left"></div>
                 <div class="dandi"></div>   
                     <div class="lensi lens-right"></div>
+
                         <div class="eye"><div class="pupil"></div></div>
                         <div class="eye"><div class="pupil"></div></div>
                     </div>
             </div>
 
-                    <div class="char yellow">
+
+
+
+                    <!-- copy boy -->
+            <div class="char yellow">
     <div class="cap">
         <div class="cap-brim"></div>
     </div>
@@ -770,7 +794,9 @@
 </div>
             
 
-                        <div class="char white">
+
+                        <!-- luuluuuu  -->
+            <div class="char white">
                 <div class="eye-container">
                     <div class="eye"><div class="pupil"></div></div>
                     <div class="eye"><div class="pupil"></div></div>
@@ -784,6 +810,8 @@
             </div>
         </div>
     </div>
+
+
 
     <form class="form-side" id="loginForm">
         <div class="logo">
