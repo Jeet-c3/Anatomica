@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Anatomica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+        
+        :root {
+            --bg-color: #e6eef5;
+            --shadow-light: #ffffff;
+            --shadow-dark: #c5d2e0;
+            --text-main: #334155;
+            --text-muted: #64748b;
+        }
+
+        body { 
+            font-family: 'Nunito', system_ui, sans-serif; 
+            background-color: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        /* Claymorphism Base Styles */
+        .clay-box {
+            background: #f0f5f9;
+            border-radius: 2.5rem;
+            box-shadow: 
+                20px 20px 40px var(--shadow-dark), 
+                -20px -20px 40px var(--shadow-light),
+                inset 4px 4px 10px rgba(255, 255, 255, 0.9),
+                inset -4px -4px 10px rgba(0, 0, 0, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .clay-card {
+            background: #f0f5f9;
+            border-radius: 2rem;
+            box-shadow: 
+                10px 10px 20px var(--shadow-dark), 
+                -10px -10px 20px var(--shadow-light),
+                inset 3px 3px 8px rgba(255, 255, 255, 0.9),
+                inset -3px -3px 8px rgba(0, 0, 0, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .clay-btn {
+            background: #f0f5f9;
+            border-radius: 1.5rem;
+            box-shadow: 
+                6px 6px 12px var(--shadow-dark), 
+                -6px -6px 12px var(--shadow-light),
+                inset 2px 2px 5px rgba(255, 255, 255, 0.9),
+                inset -2px -2px 5px rgba(0, 0, 0, 0.03);
+            font-weight: 700;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        .clay-btn:active {
+            box-shadow: 
+                inset 6px 6px 12px var(--shadow-dark), 
+                inset -6px -6px 12px var(--shadow-light);
+            transform: scale(0.98);
+        }
+
+        .clay-btn-primary {
+            background: #3b82f6;
+            color: white;
+            box-shadow: 
+                8px 8px 16px var(--shadow-dark), 
+                -8px -8px 16px var(--shadow-light),
+                inset 3px 3px 8px rgba(255, 255, 255, 0.4),
+                inset -3px -3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .clay-input {
+            background: #e6eef5;
+            box-shadow: 
+                inset 6px 6px 12px var(--shadow-dark), 
+                inset -6px -6px 12px var(--shadow-light);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .clay-input:focus { border-color: #3b82f6; outline: none; }
+        .score-number { font-variant-numeric: tabular-nums; }
+        .locked { opacity: 0.6; pointer-events: none; filter: grayscale(50%); }
+    </style>
+</head>
+<body class="min-h-screen pb-12">
+
+    <div class="fixed top-0 left-0 right-0 z-50 px-6 py-4 pointer-events-none">
+        <div class="max-w-5xl mx-auto clay-card px-6 py-3 flex items-center justify-between pointer-events-auto bg-white/40 backdrop-blur-md border border-white/80">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-500 rounded-2xl flex items-center justify-center shadow-[inset_2px_2px_6px_rgba(255,255,255,0.4)]">
+                    <i class="fa-solid fa-rocket text-white text-xl rotate-12"></i>
+                </div>
+                <span class="font-extrabold text-2xl tracking-tight text-slate-800">Anatomica</span>
+            </div>
+            
+            <div class="flex items-center gap-3 md:gap-6">
+                <button onclick="window.location.href='gallery.html'" class="clay-btn px-5 py-2.5 flex items-center gap-2 text-blue-600 hover:bg-blue-50 transition-colors">
+                    <i class="fa-solid fa-images"></i>
+                    <span class="hidden sm:inline">Gallery</span>
+                </button>
+
+                <button onclick="logout()" class="clay-btn px-5 py-2.5 flex items-center gap-2 text-red-500 hover:text-red-600">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="hidden sm:inline">Logout</span>
+                </button>
+
+                <div class="hidden lg:flex items-center gap-2 text-sm px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 font-bold">
+                    <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.6)]"></div>
+                    <span>Online</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl w-full mx-auto px-6 pt-32">
+        <div class="clay-box p-8 md:p-12 relative">
+            
+            <div class="flex justify-center -mt-20 mb-6">
+                <div class="relative group">
+                    <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white box-content shadow-[10px_10px_20px_#c5d2e0,-10px_-10px_20px_#ffffff] cursor-pointer bg-white">
+                        <img id="profile-pic" src="https://picsum.photos/id/1005/800/800" alt="Profile Picture" class="w-full h-full object-cover">
+                    </div>
+                    <div onclick="document.getElementById('image-upload').click()" 
+                         class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all rounded-full">
+                        <i class="fa-solid fa-camera text-2xl md:text-3xl text-white"></i>
+                    </div>
+                    <input type="file" id="image-upload" accept="image/*" class="hidden" onchange="uploadProfileImage(event)">
+                </div>
+            </div>
+
+            <div class="text-center mb-10">
+                <div class="flex items-center justify-center gap-3">
+                    <h1 id="display-name" class="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight">Profile</h1>
+                    <button onclick="editName()" class="w-10 h-10 rounded-full clay-btn flex items-center justify-center text-blue-500">
+                        <i class="fa-solid fa-pencil text-sm"></i>
+                    </button>
+                </div>
+                <p id="username" class="text-lg md:text-xl text-slate-500 font-bold mt-1">@AnatomicaUser</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="clay-card p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center gap-2 text-orange-500 font-bold text-xs uppercase tracking-widest">
+                                <i class="fa-solid fa-trophy"></i>
+                                <span>Score</span>
+                            </div>
+                            <div id="score-value" class="score-number text-4xl font-extrabold text-slate-800 mt-4">0</div>
+                        </div>
+                        <i class="fa-solid fa-lock text-slate-300"></i>
+                    </div>
+                </div>
+
+                <div class="clay-card p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center gap-2 text-emerald-500 font-bold text-xs uppercase tracking-widest">
+                                <i class="fa-solid fa-child-reaching"></i>
+                                <span>Age</span>
+                            </div>
+                            <div id="age-value" class="text-4xl font-extrabold text-slate-800 mt-4">15</div>
+                        </div>
+                        <i onclick="showAgeLockedMessage()" class="fa-solid fa-lock text-slate-300 cursor-pointer"></i>
+                    </div>
+                </div>
+
+                <div onclick="editDob()" id="dob-card" class="clay-card p-6 hover:-translate-y-1 cursor-pointer group">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center gap-2 text-purple-500 font-bold text-xs uppercase tracking-widest">
+                                <i class="fa-solid fa-cake-candles"></i>
+                                <span>Birthday</span>
+                            </div>
+                            <div id="dob-value" class="text-2xl font-extrabold text-slate-800 mt-5">24 Feb 2007</div>
+                        </div>
+                        <i id="dob-edit-icon" class="fa-solid fa-pencil text-purple-300 opacity-0 group-hover:opacity-100"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dob-locked-notice" class="hidden mt-8 text-center text-orange-500 font-bold text-sm bg-orange-50 py-3 px-6 rounded-full w-max mx-auto border border-orange-200">
+                <i class="fa-solid fa-lock mr-2"></i> DOB has been locked.
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-modal" onclick="if(event.target.id === 'edit-modal')hideModal()" 
+         class="hidden fixed inset-0 bg-slate-900/30 backdrop-blur-sm z-[999] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="clay-box p-8 w-full max-w-md mx-auto">
+            <h3 id="modal-title" class="text-xl font-extrabold text-slate-800 mb-6"></h3>
+            <input id="modal-input" type="text" class="w-full clay-input rounded-2xl px-6 py-4 text-lg font-bold text-slate-700">
+            <div class="flex gap-4 mt-8">
+                <button onclick="hideModal()" class="flex-1 py-3.5 clay-btn text-slate-500">Cancel</button>
+                <button onclick="saveEdit()" class="flex-1 py-3.5 clay-btn clay-btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentEditField = '';
+        let dobUpdatedOnce = false;
+
+        function calculateAge(dobStr) {
+            try {
+                const [day, monthStr, year] = dobStr.split(' ');
+                const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+                const month = months.indexOf(monthStr) + 1;
+                const dob = new Date(year, month - 1, parseInt(day));
+                const today = new Date();
+                let age = today.getFullYear() - dob.getFullYear();
+                const monthDiff = today.getMonth() - dob.getMonth();
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) age--;
+                return Math.max(0, age);
+            } catch(e) { return 15; }
+        }
+
+        function loadProfileData() {
+            const name = localStorage.getItem('displayName') || 'User';
+            const username = localStorage.getItem('username') || '@Anatomica';
+            let dob = localStorage.getItem('dob') || '24 Feb 2007';
+            const picUrl = localStorage.getItem('profilePic') || 'https://picsum.photos/id/1005/800/800';
+            dobUpdatedOnce = localStorage.getItem('dobUpdatedOnce') === 'true';
+
+            document.getElementById('display-name').textContent = name;
+            document.getElementById('username').textContent = username;
+            document.getElementById('score-value').textContent = '0';  
+            document.getElementById('age-value').textContent = calculateAge(dob);
+            document.getElementById('dob-value').textContent = dob;
+            document.getElementById('profile-pic').src = picUrl;
+
+            if (dobUpdatedOnce) {
+                document.getElementById('dob-card').classList.add('locked');
+                document.getElementById('dob-edit-icon').classList.add('hidden');
+                document.getElementById('dob-locked-notice').classList.remove('hidden');
+            }
+        }
+
+        function uploadProfileImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('profile-pic').src = e.target.result;
+                localStorage.setItem('profilePic', e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function logout() {
+            const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444'];
+            for (let i = 0; i < 60; i++) {
+                const confetti = document.createElement('div');
+                confetti.textContent = '✦';
+                confetti.style.cssText = `position:fixed; left:${Math.random()*100}vw; top:-20px; color:${colors[Math.floor(Math.random()*colors.length)]}; font-size:${Math.random()*20+10}px; z-index:9999; pointer-events:none;`;
+                document.body.appendChild(confetti);
+                const fallTime = Math.random() * 2000 + 1500;
+                confetti.animate([{transform:'translateY(0)'}, {transform:`translateY(${window.innerHeight+20}px) rotate(720deg)`}], {duration: fallTime});
+                setTimeout(() => confetti.remove(), fallTime);
+            }
+            setTimeout(() => {
+                localStorage.clear();
+                window.location.href = 'index.html'; // Redirects to Login
+            }, 700);
+        }
+
+        function showAgeLockedMessage() { alert("Update your Date of Birth to change age."); }
+        function editName() {
+            currentEditField = 'name';
+            document.getElementById('modal-title').textContent = 'Edit Display Name';
+            document.getElementById('modal-input').value = document.getElementById('display-name').textContent;
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+        function editDob() {
+            if (dobUpdatedOnce) return alert("Date of Birth is locked.");
+            currentEditField = 'dob';
+            document.getElementById('modal-title').textContent = 'Edit DOB (e.g. 24 Feb 2007)';
+            document.getElementById('modal-input').value = document.getElementById('dob-value').textContent;
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+        function hideModal() { document.getElementById('edit-modal').classList.add('hidden'); }
+        function saveEdit() {
+            const val = document.getElementById('modal-input').value.trim();
+            if (!val) return hideModal();
+            if (currentEditField === 'name') {
+                document.getElementById('display-name').textContent = val;
+                localStorage.setItem('displayName', val);
+            } else {
+                const age = calculateAge(val);
+                document.getElementById('dob-value').textContent = val;
+                document.getElementById('age-value').textContent = age;
+                localStorage.setItem('dob', val);
+                localStorage.setItem('dobUpdatedOnce', 'true');
+                location.reload();
+            }
+            hideModal();
+        }
+        window.onload = loadProfileData;
+    </script>
+</body>
+</html>

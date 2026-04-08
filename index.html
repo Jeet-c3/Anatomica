@@ -91,7 +91,7 @@
         .purple { 
             width: 95px; height: 220px; 
             background: var(--c-purple); 
-            left: 50px; 
+            left: 40px; 
             border-radius: 20px 20px 0 0; 
             z-index: 1;
             animation: slideUp 0.7s 0.1s cubic-bezier(0.34, 1.56, 0.64, 1) backwards; 
@@ -107,7 +107,7 @@
         .yellow { 
             width: 75px; height: 190px; 
             background: var(--c-yellow);
-            right: 50px;
+            right: 60px;
             border-radius: 15px 15px 0 0; 
             z-index: 2;
             animation: slideUp 0.7s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
@@ -115,7 +115,7 @@
         .black { 
             width: 75px; height: 205px; 
             background: skyblue; 
-            right: 150px;
+            right: 160px;
             border-radius: 15px 15px 0 0; 
             z-index: 2;
             animation: slideUp 0.7s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
@@ -852,20 +852,20 @@
     const eyeOpenPath = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
     const eyeClosedPath = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
 
-function updateCharacterState() {
-    if (isPasswordFocused) {
-        if (isPasswordVisible) {
-            illustration.classList.add('is-hiding');
-            illustration.classList.remove('is-closed-eyes');
+    function updateCharacterState() {
+        if (isPasswordFocused) {
+            if (isPasswordVisible) {
+                illustration.classList.add('is-hiding');
+                illustration.classList.remove('is-closed-eyes');
+            } else {
+                illustration.classList.remove('is-hiding');
+                illustration.classList.add('is-closed-eyes');
+            }
         } else {
             illustration.classList.remove('is-hiding');
-            illustration.classList.add('is-closed-eyes');
+            illustration.classList.remove('is-closed-eyes');
         }
-    } else {
-        illustration.classList.remove('is-hiding');
-        illustration.classList.remove('is-closed-eyes');
     }
-}
 
     passInput.addEventListener('focus', () => {
         isPasswordFocused = true;
@@ -915,13 +915,23 @@ function updateCharacterState() {
     const loginForm = document.getElementById('loginForm');
     loginForm.addEventListener('submit', function(event) {
         event.preventDefault();
+        
+        const email = document.getElementById('emailInput').value.trim();
+        
+        let displayName = 'You';
+        if (email) {
+            const usernamePart = email.split('@')[0];
+            displayName = usernamePart.charAt(0).toUpperCase() + usernamePart.slice(1).toLowerCase();
+        }
+        localStorage.setItem('displayName', displayName);
+        localStorage.setItem('username', '@' + (email ? email.split('@')[0].toLowerCase() : '') + '_Rishi');
+        localStorage.setItem('score', '8450');
+        localStorage.setItem('dob', '24 Feb 2007');
 
-        const email = document.getElementById('emailInput').value;
-        const password = document.getElementById('passInput').value;
-        alert("Welcome to Anatomica!");
+        alert("Welcome to Anatomica! 🎉\n\nYour profile is ready in gallery.html");
+        
         window.location.href = "gallery.html"; 
     });
-
 </script>
 </body>
 </html>
