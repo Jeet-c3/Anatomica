@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Anatomica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+        
+        :root {
+            --bg-color: #d7ebfc;
+            --shadow-light: #ffffff;
+            --shadow-dark: #b8cbdf;
+            --text-main: #334155;
+            --text-muted: #64748b;
+        }
+
+        body { 
+            font-family: 'Nunito', system-ui, sans-serif; 
+            background-color: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        .clay-box {
+            background: #f0f5f9;
+            border-radius: 2.5rem;
+            box-shadow: 
+                20px 20px 40px var(--shadow-dark), 
+                -20px -20px 40px var(--shadow-light),
+                inset 4px 4px 10px rgba(255,255,255,0.5),
+                inset -4px -4px 10px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        .clay-btn {
+            background: #f0f5f9;
+            border-radius: 1.25rem;
+            box-shadow: 
+                6px 6px 12px var(--shadow-dark), 
+                -6px -6px 12px var(--shadow-light);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .clay-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                8px 8px 16px var(--shadow-dark), 
+                -8px -8px 16px var(--shadow-light);
+        }
+
+        .clay-btn:active {
+            transform: translateY(1px);
+            box-shadow: 
+                inset 4px 4px 8px var(--shadow-dark), 
+                inset -4px -4px 8px var(--shadow-light);
+        }
+
+        .clay-input {
+            background: #eaf0f6;
+            border-radius: 1rem;
+            box-shadow: 
+                inset 6px 6px 12px var(--shadow-dark), 
+                inset -6px -6px 12px var(--shadow-light);
+            border: none;
+            outline: none;
+        }
+
+        .profile-avatar-container {
+            position: relative;
+            box-shadow: 
+                10px 10px 20px var(--shadow-dark), 
+                -10px -10px 20px var(--shadow-light),
+                inset 2px 2px 5px rgba(255,255,255,0.5);
+            border: 4px solid #f0f5f9;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
+
+    <div class="w-full max-w-4xl clay-box p-6 sm:p-10 relative overflow-hidden">
+        <button onclick="window.location.href='gallery.html'" class="absolute top-6 left-6 clay-btn px-4 py-2 text-sm font-semibold flex items-center gap-2 text-slate-600">
+            <i class="fa-solid fa-arrow-left"></i> Gallery
+        </button>
+
+        <div class="flex flex-col md:flex-row gap-8 items-center md:items-stretch mt-8 md:mt-0">
+            <div class="w-full md:w-2/5 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-b from-slate-50 to-slate-100/50 rounded-[2rem] border border-white/60 shadow-inner">
+                <div class="profile-avatar-container w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden mb-4 group cursor-pointer">
+                    <img id="profile-pic" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2394a3b8'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>" alt="Avatar" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                    <label for="avatar-upload" class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer text-white text-sm font-medium">
+                        <i class="fa-solid fa-camera text-xl"></i>
+                    </label>
+                    <input type="file" id="avatar-upload" accept="image/*" class="hidden" onchange="uploadProfileImage(event)">
+                </div>
+                
+                <h2 id="display-name" class="text-2xl font-extrabold text-slate-700 tracking-tight">User</h2>
+                <p id="username" class="text-sm text-slate-400 font-semibold mb-6">@username</p>
+                
+                <button onclick="logout()" class="clay-btn w-full py-3 text-red-500 font-bold tracking-wide hover:bg-red-50/50">
+                    <i class="fa-solid fa-power-off mr-2"></i> Log Out
+                </button>
+            </div>
+
+            <div class="w-full md:w-3/5 flex flex-col justify-between gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="clay-box p-5 bg-white/40 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-500 text-xl shadow-sm">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Rank Score</p>
+                            <h3 id="score-value" class="text-xl font-extrabold text-slate-700">0</h3>
+                        </div>
+                    </div>
+
+                    <div class="clay-box p-5 bg-white/40 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-500 text-xl shadow-sm">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Academic Level</p>
+                            <h3 id="class-value" class="text-xl font-extrabold text-slate-700">-</h3>
+                        </div>
+                    </div>
+
+                    <div class="clay-box p-5 bg-white/40 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-500 text-xl shadow-sm">
+                            <i class="fa-solid fa-cake-candles"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Calculated Age</p>
+                            <h3 id="age-value" class="text-xl font-extrabold text-slate-700">-</h3>
+                        </div>
+                    </div>
+
+                    <div class="clay-box p-5 bg-white/40 flex items-center justify-center justify-between pr-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-rose-100 flex items-center justify-center text-rose-500 text-xl shadow-sm">
+                                <i class="fa-solid fa-calendar-day"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Date of Birth</p>
+                                <h3 id="dob-value" class="text-sm font-extrabold text-slate-700">-</h3>
+                            </div>
+                        </div>
+                        <button onclick="editDob()" class="text-slate-400 hover:text-indigo-500 transition-colors">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="clay-box p-6 bg-slate-50/50 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div class="text-center sm:text-left">
+                        <h4 class="font-bold text-slate-700">Identity Details</h4>
+                        <p class="text-xs text-slate-400 font-semibold">Modify how your public display name appears across the app.</p>
+                    </div>
+                    <button onclick="editName()" class="clay-btn px-6 py-2.5 font-bold text-sm text-indigo-600 bg-white whitespace-nowrap">
+                        Edit Name
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
+        <div class="w-full max-w-md clay-box p-6 bg-white flex flex-col gap-4">
+            <h3 id="modal-title" class="text-lg font-bold text-slate-700">Modify Field Data</h3>
+            <input type="text" id="modal-input" class="w-full clay-input px-4 py-3 text-slate-700 font-semibold text-base">
+            <div class="flex justify-end gap-3 mt-2">
+                <button onclick="hideModal()" class="clay-btn px-5 py-2 text-sm font-bold text-slate-400">Cancel</button>
+                <button onclick="saveEdit()" class="clay-btn px-5 py-2 text-sm font-bold text-indigo-600 bg-indigo-50/50">Commit Change</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+    import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+
+    // Application Sync Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCdUjgwGXTo3cx-UlhnZM3apHwdG1bVDhA",
+        authDomain: "anatomica-e2810.firebaseapp.com",
+        databaseURL: "https://anatomica-e2810-default-rtdb.firebaseio.com",
+        projectId: "anatomica-e2810",
+        storageBucket: "anatomica-e2810.firebasestorage.app",
+        messagingSenderId: "1049561735061",
+        appId: "1:1049561735061:web:1edf03dd37e20827a7e09c",
+        measurementId: "G-VNWH1TBBS5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    let currentUserUid = '';
+    let profileData = null;
+    let currentEditField = '';
+
+    function calculateAge(dobString) {
+        const birthDate = new Date(dobString);
+        if (isNaN(birthDate)) return '-';
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+    // Active session monitoring daemon
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            currentUserUid = user.uid;
+            await loadProfileData(user.uid);
+        } else {
+            // Fallback checking framework
+            const legacyEmail = localStorage.getItem('currentUser');
+            if (!legacyEmail) {
+                alert("No logged in session verified.");
+                window.location.href = 'index.html';
+            }
+        }
+    });
+
+    // Realtime Database parsing routine
+    async function loadProfileData(uid) {
+        try {
+            const userRef = ref(db, 'users/' + uid);
+            const snapshot = await get(userRef);
+            
+            if (!snapshot.exists()) {
+                alert("Profile data node parsing failed.");
+                window.location.href = 'index.html';
+                return;
+            }
+
+            profileData = snapshot.val();
+
+            let formattedDate = profileData.dob;
+            if (profileData.dob && profileData.dob.includes('-')) {
+                const dateObj = new Date(profileData.dob);
+                if (!isNaN(dateObj)) {
+                    formattedDate = dateObj.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+                }
+            }
+
+            document.getElementById('display-name').textContent = profileData.displayName || "User";
+            document.getElementById('username').textContent = profileData.username || "@unknown";
+            document.getElementById('score-value').textContent = profileData.score !== undefined ? profileData.score : 0;
+            document.getElementById('age-value').textContent = profileData.age || calculateAge(profileData.dob);
+            document.getElementById('class-value').textContent = profileData.classLevel || "Not Set";
+            document.getElementById('dob-value').textContent = formattedDate || "Not Set";
+            
+            if (profileData.profilePic) {
+                document.getElementById('profile-pic').src = profileData.profilePic;
+            } else {
+                document.getElementById('profile-pic').src = "https://picsum.photos/id/1005/200/200";
+            }
+        } catch (error) {
+            console.error("Critical error reading profile snapshot:", error);
+        }
+    }
+
+    // Canvas asset packaging method 
+    function uploadProfileImage(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = async () => {
+                const canvas = document.createElement('canvas');
+                const targetSize = 200;
+                canvas.width = targetSize;
+                canvas.height = targetSize;
+                const ctx = canvas.getContext('2d');
+                
+                const minDim = Math.min(img.width, img.height);
+                const sx = (img.width - minDim) / 2;
+                const sy = (img.height - minDim) / 2;
+                
+                ctx.drawImage(img, sx, sy, minDim, minDim, 0, 0, targetSize, targetSize);
+
+                try {
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                    document.getElementById('profile-pic').src = compressedBase64;
+                    
+                    if (currentUserUid) {
+                        await update(ref(db, 'users/' + currentUserUid), {
+                            profilePic: compressedBase64
+                        });
+                        profileData.profilePic = compressedBase64;
+                    }
+                } catch (error) {
+                    alert("The file conversion context encountered sizing limitations.");
+                }
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function editName() {
+        currentEditField = 'name';
+        document.getElementById('modal-title').textContent = 'Modify Public Display Name';
+        document.getElementById('modal-input').type = 'text';
+        document.getElementById('modal-input').value = document.getElementById('display-name').textContent;
+        document.getElementById('edit-modal').classList.remove('hidden');
+    }
+
+    function editDob() {
+        if (profileData && profileData.dobLocked) {
+            return alert("Date of Birth modification historical lock active.");
+        }
+        currentEditField = 'dob';
+        document.getElementById('modal-title').textContent = 'Modify Date of Birth';
+        document.getElementById('modal-input').type = 'date';
+        document.getElementById('modal-input').value = profileData ? (profileData.dob || '') : '';
+        document.getElementById('edit-modal').classList.remove('hidden');
+    }
+
+    function hideModal() {
+        document.getElementById('edit-modal').classList.add('hidden');
+    }
+
+    async function saveEdit() {
+        const val = document.getElementById('modal-input').value.trim();
+        if (!val || !currentUserUid) return hideModal();
+
+        const updates = {};
+        if (currentEditField === 'name') {
+            updates.displayName = val;
+        } else if (currentEditField === 'dob') {
+            updates.dob = val;
+            updates.age = calculateAge(val);
+            updates.dobLocked = true; 
+        }
+
+        try {
+            await update(ref(db, 'users/' + currentUserUid), updates);
+            hideModal();
+            await loadProfileData(currentUserUid); 
+        } catch (error) {
+            console.error("Update commit rejected:", error);
+            alert("Failed to commit live change.");
+        }
+    }
+
+    async function logout() {
+        try {
+            await signOut(auth);
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        } catch (error) {
+            console.error("SignOut lifecycle exception:", error);
+        }
+    }
+
+    // Core module interface exposure to HTML Context
+    window.editName = editName;
+    window.editDob = editDob;
+    window.hideModal = hideModal;
+    window.saveEdit = saveEdit;
+    window.logout = logout;
+    window.uploadProfileImage = uploadProfileImage;
+</script>
+</body>
+</html>

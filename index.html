@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomica | Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+        :root {
+            --bg-body: #e6e8eb;
+            --bg-card: #ffffff;
+            --bg-illustration: #fcfbf9;
+            --text-main: #111111;
+            --text-sub: #777777;
+            --border-color: #e0e0e0;
+            --primary: #111111;
+            --c-purple: #7c4af5;
+            --c-pink: #ed4f9b;
+            --c-yellow: #f5c83b;
+            --c-white: hsl(0, 7%, 97%);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        
+        body { background: linear-gradient(270deg, #07AEEA, #2BF598); background-size: 400% 400%; animation: gradientMove 8s ease infinite; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        
+        @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
+        .login-card { display: flex; width: 1200px; height: 720px; background: var(--bg-card); border-radius: 30px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.05); overflow: hidden; animation: fadeScaleIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        @keyframes fadeScaleIn { 0% { opacity: 0; transform: scale(0.95) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+        
+        .illustration-side { flex: 1.15; position: relative; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; background: whitesmoke; }
+        
+        .char-container { position: relative; width: 380px; height: 300px; bottom: -2px; }
+        
+        .char { position: absolute; bottom: 0; transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) backwards !important; }
+        
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        
+        .purple { width: 95px; height: 220px; background: var(--c-purple); left: 40px; border-radius: 20px 20px 0 0; z-index: 1; animation-delay: 0.1s;}
+        
+        .pink { width: 65px; height: 150px; background: var(--c-pink); left: 330px; border-radius: 15px 15px 0 0; z-index: 3; animation-delay: 0.2s;}
+        
+        .yellow { width: 75px; height: 190px; background: var(--c-yellow); right: 60px; border-radius: 15px 15px 0 0; z-index: 2; animation-delay: 0.3s;}
+        
+        .black { width: 75px; height: 205px; background: skyblue; right: 160px; border-radius: 15px 15px 0 0; z-index: 2; animation-delay: 0.3s;}
+        
+        .white { width: 190px; height: 95px; background: var(--c-white); left: 65px; border-radius: 95px 95px 0 0; z-index: 3; box-shadow:1px 1px 23px #b0b0b0; animation-delay: 0.4s;}
+        
+        .eye-container { position: absolute; top: 30px; width: 100%; display: flex; justify-content: center; gap: 15px; }
+        
+        .purple .eye-container { top: 40px; gap: 20px; } .pink .eye-container { top: 25px; gap: 12px; } .yellow .eye-container { top: 35px; gap: 16px; } .white .eye-container { top: 35px; gap: 35px; }
+        
+        .eye { width: 12px; height: 12px; background: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; position: relative; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); animation: blink 4s infinite ease-in-out;}
+        
+        .white .eye { width: 14px; height: 14px;}
+        
+        .pupil { width: 5px; height: 5px; background: black; border-radius: 50%; position: absolute; transition: opacity 0.2s;}
+        
+        .white .pupil { width: 6px; height: 6px; }
+        
+        @keyframes blink { 0%, 2%, 100% { transform: scaleY(1); } 1% { transform: scaleY(0.1); } }
+        
+        .purple .eye { animation-delay: 0.2s; } .pink .eye { animation-delay: 1.5s; } .yellow .eye { animation-delay: 0.7s; } .black .eye { animation-delay: 2.1s; } .white .eye { animation-delay: 0.5s; }
+        
+        @keyframes bob { 0%, 100% { margin-top: 0; } 50% { margin-top: 2px; } }
+        
+        .eye-container, .yellow-smile, .pink-smile, .black-smile, .purple-smile, .whitei-smile, .cute, .lens, .lensi, .danda, .dandi { animation: bob 3s infinite ease-in-out; }
+        
+        .white-smile { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); width: 12px; height: 6px; border-bottom: 2.5px solid black; border-radius: 50%; }
+        
+        .yellow-smile { position: absolute; bottom: 125px; left: 50%; transform: translateX(-50%); width: 12px; height: 6px; border-bottom: 3px solid black; border-radius: 50%; }
+        
+        .pink-smile { position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%); width: 12px; height: 6px; border-bottom: 2.5px solid black; border-radius: 50%; }
+        
+        .black-smile { position: absolute; bottom: 150px; left: 50%; transform: translateX(-50%); width: 12px; height: 6px; border-bottom: 2.5px solid black; border-radius: 50%;}
+        
+        .purple-smile { position: absolute; bottom: 150px; left: 50%; transform: translateX(-50%); width: 12px; height: 6px; border-bottom: 2.5px solid black; border-radius: 50%;}
+        
+        .cute{ position: absolute; top: -10px; left: 90%; transform: translateX(-50%);}
+        
+        .whitei-smile{ position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);}
+        
+        .yellow .cap { position: absolute; top: -12px; left: -3px; width: 81px; height: 32px; background: #0f172a; border-radius: 30px 30px 0 0; z-index: 15;}
+        
+        .yellow .cap-brim { position: absolute; bottom: 0px; left: -22px; width: 35px; height: 10px; background: #e11d48; border-radius: 10px 0 0 10px; border: 2px solid #0f172a; border-right: none;}
+        
+        .yellow .cap::after { content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%); width: 10px; height: 5px; background: #e11d48; border-radius: 5px 5px 0 0;}
+        
+        .purple .cap { position: absolute; top: -12px; left: -3px; width: 100px; height: 47px; background: rgb(65, 42, 0); border-radius: 30px 30px 0 0; z-index: 15;}
+        
+        .purple .cap::after { content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%); width: 10px; height: 5px; border-radius: 5px 5px 0 0;}
+        
+        .cap-V{ position: absolute; top: 30px; left: 35px; background: var(--c-purple); width: 30px; height: 20px; border-radius: 30px 30px 0 0; }
+        
+        .black .cowboy-hat { position: absolute; top: -26px; left: 50%; transform: translateX(-50%); width: 52px; height: 38px; background: #8B4513; border-radius: 30px 30px 0 0; z-index: 15; box-shadow: inset 0 8px 0 -3px #6b340e;}
+        
+        .black .cowboy-hat::before { content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 105px; height: 22px; background: #8B4513; border-radius: 50%; z-index: -1; box-shadow: 0 4px 5px rgba(0,0,0,0.1);}
+        
+        .black .cowboy-hat::after { content: ''; position: absolute; bottom: 4px; left: 0; width: 100%; height: 6px; background: #3e1f06; border-radius: 2px;}
+        
+        .lens { position: absolute; width: 28px; height: 28px; border: 2px solid #333; border-radius: 45%; border-top-left-radius: 0px; background: rgba(255, 255, 255, 0.3); z-index: 10; pointer-events: none; }
+        
+        .pink .eye-container { position: relative; display: flex; justify-content: center; align-items: center; gap: 6px; }
+        
+        .danda { width: 2px; height: 2px; background: #333; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); z-index: 11;}
+        
+        .pink .lens-left { left: 4px; } .pink .lens-right { right: 4px; }
+        
+        .lensi {position: absolute; width: 23px; height: 18px; border: 2px solid #333; background: rgba(255, 255, 255, 0.3); z-index: 10; pointer-events: none; top: -2px;}
+        
+        .dandi { width: 5px; height: 2px; background: #333; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); z-index: 11;}
+        
+        .black .lens-left { left: 13px; } .black .lens-right { right: 13px; }
+        
+        .white-half{ background: #111111; position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); width: 191px; height: 20px; border-top: 2.5px solid black; box-shadow:0px -10px 5px #111111;}
+        
+        .panda{ position: absolute; width: 28px; height: 28px; border: none; border-radius: 50%; background: rgba(0, 0, 0,1); box-shadow:0px 0px 6px 10px black; z-index: 10; pointer-events: none;}
+        
+        .white .eare-container { position: relative; top: 10px; display: flex; justify-content: center; align-items: center; gap: 6px; }
+        
+        .white .lens-left { left: 11px; } .white .lens-right { right: 11px; }
+        
+        .white .eye-container { top: 25px; gap: 32px; }
+        .panda-patch { width: 36px; height: 42px; background: #000000; box-shadow: 0px 0px 5px #000000; display: flex; justify-content: center; align-items: center; }
+        .panda-patch.patch-left { transform: rotate(-12deg); border-radius: 55% 45% 55% 45%; }
+        .panda-patch.patch-right { transform: rotate(12deg); border-radius: 45% 55% 45% 55%; }
+        
+        .white .eye { width: 16px !important; height: 16px !important; background: white !important; border-radius: 50% !important; display: flex !important; justify-content: center !important; align-items: center !important; position: relative !important; box-shadow: none !important; margin-top: 0 !important; }
+        .white .pupil { width: 7px !important; height: 7px !important; background: #111111 !important; border-radius: 50% !important; position: absolute !important; opacity: 1 !important; }
+
+        .is-hiding .white .eye, .is-closed-eyes .white .eye { background: transparent !important; }
+        .is-hiding .white .pupil, .is-closed-eyes .white .pupil { width: 16px !important; height: 4px !important; border-radius: 2px !important; background: white !important; opacity: 1 !important; transform: translate(0, 0) !important; }
+
+        .is-hiding .purple { transform: translateY(140px) translateX(-10px) rotate(-8deg); }
+        .is-hiding .pink { transform: translateY(140px); }
+        .is-hiding .yellow { transform: translateY(150px) translateX(10px) rotate(8deg); }
+        .is-closed-eyes .eye { height: 4px !important; background: var(--text-main) !important; border-radius: 4px !important; margin-top: 6px; animation: none; }
+        .is-closed-eyes .pupil { opacity: 0; }
+        .is-closed-eyes .white .eye { box-shadow: none; }
+        
+        .blossom-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .petal { position: absolute; top: -20px; width: 12px; height: 18px; background: linear-gradient(to bottom, #ffc0cb, #f8bbd0); border-radius: 80% 10% 80% 10%; opacity: 0; filter: drop-shadow(0 0 5px rgba(255, 182, 193, 0.3)); animation: drift 15s linear infinite; }
+        @keyframes drift { 0% { transform: translateY(0) translateX(0) rotate(0deg) scale(0.8); opacity: 0; } 15% { opacity: 0.7; } 85% { opacity: 0.7; } 100% { transform: translateY(110vh) translateX(150px) rotate(720deg) scale(1.2); opacity: 0; } }
+        .petal:nth-child(1) { left: 10%; animation-delay: 0s; width: 14px; height: 20px; } .petal:nth-child(2) { left: 25%; animation-delay: 5s; transform: rotate(45deg); } .petal:nth-child(3) { left: 45%; animation-delay: 2s; width: 10px; filter: blur(1px); } .petal:nth-child(4) { left: 60%; animation-delay: 8s; } .petal:nth-child(5) { left: 80%; animation-delay: 3s; width: 15px; height: 22px; } .petal:nth-child(6) { left: 90%; animation-delay: 11s; filter: blur(0.5px); } .petal:nth-child(7) { left: 35%; animation-delay: 14s; } .petal:nth-child(8) { left: 70%; animation-delay: 6s; opacity: 0.4; }
+        .form-side { flex: 0.85; padding: 70px 80px; display: flex; flex-direction: column; justify-content: center; }
+        .logo { margin-bottom: 25px; }
+        .header h2 { font-size: 32px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
+        .header p { color: var(--text-sub); font-size: 14px; margin-bottom: 15px; }
+        
+        .status-message { font-size: 13px; font-weight: 500; text-align: center; margin-bottom: 20px; padding: 10px 14px; border-radius: 12px; display: none; animation: fadeScaleIn 0.3s ease forwards; }
+
+        .social-buttons-row { display: flex; gap: 12px; margin-bottom: 20px; }
+        .btn-github { width: 100%; padding: 15px; background: white; border: 1.5px solid var(--border-color); border-radius: 50px; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 15px; font-weight: 500; color: var(--text-main); cursor: pointer; transition: background 0.2s; }
+        .btn-github:hover { background: #f8f9fa; }
+
+        .auth-nav-tabs { display: flex; border-bottom: 2px solid var(--border-color); margin-bottom: 25px; gap: 24px; }
+        .auth-tab { font-size: 15px; font-weight: 500; color: var(--text-sub); padding-bottom: 8px; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s; }
+        .auth-tab.active { color: var(--text-main); font-weight: 600; border-bottom-color: var(--primary); }
+
+        .input-group { margin-bottom: 28px; position: relative; }
+        .input-group label { display: block; font-size: 13px; font-weight: 500; color: var(--text-sub); margin-bottom: 8px; }
+        .input-group input, .input-group select { width: 100%; padding: 8px 0 12px; border: none; border-bottom: 2px solid var(--border-color); font-size: 15px; color: var(--text-main); outline: none; transition: border-color 0.3s; background: transparent; }
+        .input-group input:focus, .input-group select:focus { border-bottom-color: var(--primary); }
+        .input-group input::placeholder { color: #b0b0b0; }
+        .toggle-btn { position: absolute; right: 0; bottom: 12px; cursor: pointer; border: none; background: none; color: var(--text-sub); display: flex; align-items: center; justify-content: center; padding: 4px; }
+        .toggle-btn:hover { color: var(--text-main); }
+        .toggle-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .form-options { display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 40px; color: var(--text-sub); }
+        .checkbox-label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .checkbox-label input { width: 16px; height: 16px; accent-color: var(--primary); cursor: pointer; }
+        .form-options a { color: var(--text-sub); text-decoration: none; transition: color 0.2s; }
+        .form-options a:hover { color: var(--primary); }
+        .btn-main { width: 100%; padding: 16px; background: var(--primary); color: white; border-radius: 50px; border: none; font-size: 15px; font-weight: 500; cursor: pointer; margin-bottom: 20px; transition: transform 0.2s, box-shadow 0.2s; }
+        .btn-main:active { transform: scale(0.98); }
+        .btn-main:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .btn-google { width: 100%; padding: 15px; background: white; border: 1.5px solid var(--border-color); border-radius: 50px; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 15px; font-weight: 500; color: var(--text-main); cursor: pointer; transition: background 0.2s; }
+        .btn-google:hover { background: #f8f9fa; }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="illustration-side" id="illustration">
+        <div class="blossom-container">
+            <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+        </div>
+        
+        <div class="char-container">
+            <div class="char purple"><div class="cap"><div class="cap-V"></div></div><div class="eye-container"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div><div class="purple-smile"></div></div>
+            
+            <div class="char pink">
+                <div class="cute">🎀</div>
+                <div class="eye-container">
+                    <div class="lens lens-left"></div>
+                    <div class="danda"></div>
+                    <div class="lens lens-right" style="border-top-right-radius: 0px;border-top-left-radius: 50%;"></div>
+                    <div class="eye"><div class="pupil"></div></div>
+                    <div class="eye"><div class="pupil"></div></div>
+                </div>
+                <div class="pink-smile"></div>
+            </div>
+            
+            <div class="char black"><div class="cowboy-hat"></div><div class="eye-container"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div><div class="black-smile"></div><div class="eye-container"><div class="lensi lens-left"></div><div class="dandi"></div><div class="lensi lens-right"></div><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div></div>
+            <div class="char yellow"><div class="cap"><div class="cap-brim"></div></div><div class="eye-container"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div><div class="yellow-smile"></div></div>
+            
+            <div class="char white">
+                <div class="eye-container">
+                    <div class="panda-patch patch-left">
+                        <div class="eye"><div class="pupil"></div></div>
+                    </div>
+                    <div class="panda-patch patch-right">
+                        <div class="eye"><div class="pupil"></div></div>
+                    </div>
+                </div>
+                <div class="eare-container"><div class="panda lens-left"></div><div class="panda lens-right"></div></div>
+                <div class="white-smile"></div>
+                <div class="white-half"></div>
+            </div>
+        </div>
+    </div>
+
+    <form class="form-side" id="loginForm">
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linejoin="round">
+                <path d="M12 2L22 22H2L12 2Z" fill="black"/><path d="M12 8L16 16H8L12 8Z" fill="white"/>
+            </svg>
+        </div>
+
+        <div class="header">
+            <h2>Welcome To Anatomica!</h2>
+            <p id="formTagline">Please enter your details to sign in</p>
+        </div>
+
+        <div class="status-message" id="loginStatus"></div>
+
+        <div class="auth-nav-tabs">
+            <div class="auth-tab active" id="tabLogin">Log In</div>
+            <div class="auth-tab" id="tabSignup">Sign Up</div>
+        </div>
+
+        <div class="input-group">
+            <label>Email</label>
+            <input type="email" id="emailInput" placeholder="Enter your Email" required>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="passInput" placeholder="Enter your password" required>
+            <button class="toggle-btn" id="toggleShow" type="button">
+                <svg id="eyeIcon" viewBox="0 0 24 24">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+        </div>
+
+        <div class="form-options" id="rememberOptionRow">
+            <label class="checkbox-label"><input type="checkbox" id="rememberMe"> Remember me</label>
+            <a href="#" id="forgotPassBtn">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn-main" id="submitActionBtn">Sign in</button>
+        
+        <div class="social-buttons-row">
+            <button type="button" class="btn-google">
+                <svg width="18" height="18" viewBox="0 0 24 24">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg> Google
+            </button>
+            <button type="button" class="btn-github">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg> GitHub
+            </button>
+        </div>
+    </form>
+
+    <form class="form-side" id="setupForm" style="display: none;">
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linejoin="round">
+                <path d="M12 2L22 22H2L12 2Z" fill="black"/><path d="M12 8L16 16H8L12 8Z" fill="white"/>
+            </svg>
+        </div>
+
+        <div class="header">
+            <h2>Complete Profile</h2>
+            <p>Looks like you're new! Let's get you set up.</p>
+        </div>
+
+        <div class="status-message" id="setupStatus"></div>
+
+        <div class="input-group">
+            <label>Full Name</label>
+            <input type="text" id="nameInput" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="input-group">
+            <label>Date of Birth</label>
+            <input type="date" id="dobInput" required>
+        </div>
+
+        <div class="input-group">
+            <label>Class / Standard</label>
+            <select id="classInput" required>
+                <option value="" disabled selected>Select your class</option>
+                <option value="Middle School (6-8)">Middle School (6-8)</option>
+                <option value="High School (9-10)">High School (9-10)</option>
+                <option value="Senior Secondary (11-12)">Senior Secondary (11-12)</option>
+                <option value="College / University">College / University</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <button type="submit" class="btn-main" style="margin-top: 15px;">Create Profile</button>
+    </form>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, GithubAuthProvider, signInWithPopup, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+    import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCdUjgwGXTo3cx-UlhnZM3apHwdG1bVDhA",
+        authDomain: "anatomica-e2810.firebaseapp.com",
+        databaseURL: "https://anatomica-e2810-default-rtdb.firebaseio.com",
+        projectId: "anatomica-e2810",
+        storageBucket: "anatomica-e2810.firebasestorage.app",
+        messagingSenderId: "1049561735061",
+        appId: "1:1049561735061:web:1edf03dd37e20827a7e09c",
+        measurementId: "G-VNWH1TBBS5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+    const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
+
+    // UI Feedback Messenger System
+    function showBannerMessage(targetForm, text, isError = true) {
+        const element = document.getElementById(targetForm === 'login' ? 'loginStatus' : 'setupStatus');
+        element.innerText = text;
+        element.style.color = isError ? "#7a1c1c" : "#1e4620";
+        element.style.backgroundColor = isError ? "#fde8e8" : "#eafaf1";
+        element.style.border = isError ? "1px solid #f8b4b4" : "1px solid #b7ebd4";
+        element.style.display = "block";
+    }
+
+    function clearBannerMessage(targetForm) {
+        const element = document.getElementById(targetForm === 'login' ? 'loginStatus' : 'setupStatus');
+        element.style.display = "none";
+    }
+
+    // Realtime Error Dictionary Mapper
+    function parseFirebaseError(code) {
+        switch (code) {
+            case 'auth/invalid-credential':
+                return "Incorrect email or password. Please verify and try again.";
+            case 'auth/email-already-in-use':
+                return "This email address is already registered. Try logging in instead.";
+            case 'auth/weak-password':
+                return "Password choice is too weak. It must be at least 6 characters long.";
+            case 'auth/invalid-email':
+                return "The format of your email address is invalid.";
+            case 'auth/user-not-found':
+                return "No existing profile was discovered mapping to this email.";
+            default:
+                return "An unexpected verification error occurred. Please try again.";
+        }
+    }
+
+    // UI & Character Animation Eye-Tracking Logic
+    const illustration = document.getElementById('illustration');
+    const passInput = document.getElementById('passInput');                     
+    const toggleShow = document.getElementById('toggleShow');
+    const eyeIcon = document.getElementById('eyeIcon');
+    const eyes = document.querySelectorAll('.eye');
+    const pupils = document.querySelectorAll('.pupil');
+    let isPasswordFocused = false; let isPasswordVisible = false;
+    const eyeOpenPath = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+    const eyeClosedPath = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+    
+    function updateCharacterState() {
+        if (isPasswordFocused) {
+            if (isPasswordVisible) { illustration.classList.add('is-hiding'); illustration.classList.remove('is-closed-eyes'); } 
+            else { illustration.classList.remove('is-hiding'); illustration.classList.add('is-closed-eyes'); }
+        } else { illustration.classList.remove('is-hiding'); illustration.classList.remove('is-closed-eyes'); }
+    }
+    
+    passInput.addEventListener('focus', () => { isPasswordFocused = true; updateCharacterState(); });
+    passInput.addEventListener('blur', () => { isPasswordFocused = false; updateCharacterState(); });
+    toggleShow.addEventListener('click', () => { isPasswordVisible = !isPasswordVisible; passInput.type = isPasswordVisible ? 'text' : 'password'; eyeIcon.innerHTML = isPasswordVisible ? eyeClosedPath : eyeOpenPath; updateCharacterState(); passInput.focus(); });
+    
+    document.addEventListener('mousemove', (e) => {
+        if (illustration.classList.contains('is-hiding') || illustration.classList.contains('is-closed-eyes')) return;
+        
+        const { clientX, clientY } = e;
+        eyes.forEach((eye, index) => {
+            const pupil = pupils[index];
+            const rect = eye.getBoundingClientRect();
+            const deltaX = clientX - (rect.left + rect.width / 2);
+            const deltaY = clientY - (rect.top + rect.height / 2);
+            const angle = Math.atan2(deltaY, deltaX);
+            const distance = Math.min(Math.hypot(deltaX, deltaY) / 20, (rect.width / 2) - (pupil.getBoundingClientRect().width / 2) - 1);
+            pupil.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+        });
+    });
+
+    // Custom Interactive Tab Switching Layout Routing
+    const tabLogin = document.getElementById('tabLogin');
+    const tabSignup = document.getElementById('tabSignup');
+    const formTagline = document.getElementById('formTagline');
+    const submitActionBtn = document.getElementById('submitActionBtn');
+    const rememberOptionRow = document.getElementById('rememberOptionRow');
+    let currentAuthMode = "login";
+
+    tabLogin.addEventListener('click', () => {
+        currentAuthMode = "login";
+        clearBannerMessage('login');
+        tabLogin.classList.add('active');
+        tabSignup.classList.remove('active');
+        formTagline.innerText = "Please enter your details to sign in";
+        submitActionBtn.innerText = "Sign in";
+        rememberOptionRow.style.visibility = "visible";
+    });
+
+    tabSignup.addEventListener('click', () => {
+        currentAuthMode = "signup";
+        clearBannerMessage('login');
+        tabSignup.classList.add('active');
+        tabLogin.classList.remove('active');
+        formTagline.innerText = "Register your new credentials to build your profile";
+        submitActionBtn.innerText = "Continue to Profile Setup";
+        rememberOptionRow.style.visibility = "hidden";
+    });
+
+    // Forgot Password Trigger Logic Workflow Linker
+    document.getElementById('forgotPassBtn').addEventListener('click', async (e) => {
+        e.preventDefault();
+        clearBannerMessage('login');
+        const email = document.getElementById('emailInput').value.trim();
+        
+        if (!email) {
+            showBannerMessage('login', "Please enter your email address first, then click 'Forgot password?'.");
+            return;
+        }
+
+        try {
+            await sendPasswordResetEmail(auth, email);
+            showBannerMessage('login', "Password reset link sent successfully! Check your inbox.", false);
+        } catch (error) {
+            showBannerMessage('login', parseFirebaseError(error.code));
+        }
+    });
+
+    // Form Handling Global State Variables
+    const loginForm = document.getElementById('loginForm');
+    const setupForm = document.getElementById('setupForm');
+    let tempEmail = "";
+    let tempPassword = "";
+    let isGoogleUser = false;
+    let googleUid = "";
+
+    document.getElementById('dobInput').max = new Date().toISOString().split("T")[0];
+
+    // Unified Authentication Router Execution Block
+    loginForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        clearBannerMessage('login');
+        tempEmail = document.getElementById('emailInput').value.trim();
+        tempPassword = document.getElementById('passInput').value;
+
+        if (currentAuthMode === "login") {
+            // LOG IN FLOW
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, tempEmail, tempPassword);
+                const user = userCredential.user;
+
+                // Check database to verify profile completeness
+                const snapshot = await get(ref(db, 'users/' + user.uid));
+                if (snapshot.exists()) {
+                    localStorage.setItem('currentUser', tempEmail);
+                    window.location.href = "gallery.html"; 
+                } else {
+                    isGoogleUser = false;
+                    loginForm.style.display = 'none';
+                    setupForm.style.display = 'flex';
+                }
+            } catch (error) {
+                showBannerMessage('login', parseFirebaseError(error.code));
+            }
+        } else {
+            // SIGN UP FLOW: Proactive Validation Check runs immediately!
+            if (tempPassword.length < 6) {
+                showBannerMessage('login', "Password is too short. Firebase requires at least 6 characters.");
+                return;
+            }
+
+            try {
+                // Attempt creation instantly before switching to the profile metadata form
+                const userCredential = await createUserWithEmailAndPassword(auth, tempEmail, tempPassword);
+                
+                // If it succeeds, the account is clean. Advance instantly to page 2.
+                isGoogleUser = false;
+                loginForm.style.display = 'none';
+                setupForm.style.display = 'flex';
+            } catch (error) {
+                // If email already exists, it is flagged immediately on page 1
+                showBannerMessage('login', parseFirebaseError(error.code));
+            }
+        }
+    });
+
+    // Profile Generation Metadata Form Submission Handler
+    setupForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        clearBannerMessage('setup');
+        const name = document.getElementById('nameInput').value.trim();
+        const dob = document.getElementById('dobInput').value;
+        const userClass = document.getElementById('classInput').value;
+        const birthDate = new Date(dob);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
+        
+        if (age < 3 || age > 100) {
+            showBannerMessage('setup', "Please provide a valid Date of Birth (Ages 3 to 100 accepted).");
+            return;
+        }
+        
+        const randomDigits = Math.floor(Math.random() * 90 + 10);
+        const username = `@${name.split(" ")[0].toLowerCase()}${birthDate.getFullYear()}_${randomDigits}`;
+        
+        try {
+            // Retrieve current target UID safely
+            let uid = isGoogleUser ? googleUid : (auth.currentUser ? auth.currentUser.uid : "");
+
+            if (!uid) {
+                showBannerMessage('setup', "Authentication state sync lost. Please reload and try again.");
+                return;
+            }
+
+            const newProfile = {
+                email: tempEmail,
+                displayName: name,
+                dob: dob,
+                age: age,
+                classLevel: userClass,
+                username: username,
+                score: 0,
+                profilePic: 'https://picsum.photos/id/1005/800/800',    
+                dobLocked: false
+            };
+
+            // Write user details to Realtime Database storage node reference
+            await set(ref(db, 'users/' + uid), newProfile);
+            localStorage.setItem('currentUser', tempEmail);
+            
+            // Navigate cleanly to main gallery
+            window.location.href = "gallery.html";  
+        } catch (error) {
+            showBannerMessage('setup', "Failed to build database profile: " + error.message);
+        }
+    });
+
+    // Google Federated Authentication Endpoint
+    const googleBtn = document.querySelector('.btn-google');
+    googleBtn.addEventListener('click', async () => {
+        clearBannerMessage('login');
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+            const user = result.user;
+            
+            const snapshot = await get(ref(db, 'users/' + user.uid));
+            if (snapshot.exists()) {
+                localStorage.setItem('currentUser', user.email);
+                window.location.href = "gallery.html";
+            } else {
+                isGoogleUser = true;
+                googleUid = user.uid;
+                tempEmail = user.email || "";
+                
+                if (user.displayName) {
+                    document.getElementById('nameInput').value = user.displayName;
+                }
+                
+                loginForm.style.display = 'none';
+                setupForm.style.display = 'flex';
+            }
+        } catch (error) { 
+            showBannerMessage('login', parseFirebaseError(error.code)); 
+        }
+    });
+
+    // GitHub Federated Authentication Endpoint
+    const githubBtn = document.querySelector('.btn-github');
+    githubBtn.addEventListener('click', async () => {
+        clearBannerMessage('login');
+        try {
+            const result = await signInWithPopup(auth, githubProvider);
+            const user = result.user;
+            
+            const snapshot = await get(ref(db, 'users/' + user.uid));
+            if (snapshot.exists()) {
+                localStorage.setItem('currentUser', user.email || user.providerData[0].email);
+                window.location.href = "gallery.html";
+            } else {
+                isGoogleUser = true;
+                googleUid = user.uid;
+                tempEmail = user.email || "";
+                
+                if (user.displayName) {
+                    document.getElementById('nameInput').value = user.displayName;
+                }
+                
+                loginForm.style.display = 'none';
+                setupForm.style.display = 'flex';
+            }
+        } catch (error) { 
+            showBannerMessage('login', parseFirebaseError(error.code)); 
+        }
+    });
+</script>
+</body>
+</html>
