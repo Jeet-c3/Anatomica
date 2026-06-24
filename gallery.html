@@ -368,11 +368,14 @@
     <h2>Explore The Human Body</h2>
     <p>Understand muscles, bones, organs &amp; systems — interactive learning made beautiful</p>
     <div class="bobber">
-        <button onclick="startGallery(1)" class="clay-btn" id="Level1" style="background-color: #8a8af4;">Level 1 →
-            <span style="color: snow;font-size: 20px;">Anatomy for Kids</span></button>
-        <button onclick="startGallery(2)" class="clay-btn" id="Level2" style="background-color: rgb(250, 119, 119);">Level 2 →
+        <a href="Update/indev.html" class="clay-btn" id="Level1" style="background-color: #8a8af4; text-decoration: none;">Level 1 →
+            <span style="color: snow;font-size: 20px;">Anatomy for Kids</span>
+        </a>
+        
+        <a href="Update/indev.html" class="clay-btn" id="Level2" style="background-color: rgb(250, 119, 119); text-decoration: none;">Level 2 →
             <span style="color: snow;font-size: 20px;" id="l2-text">Anatomy for High Schoolers</span>
-        </button>
+        </a>
+
         <button onclick="startGallery(3)" class="clay-btn" id="Level3" style="background-color: #fb71fb;">Level 3 →
             <span style="color: snow;font-size: 20px;" id="l3-text">Anatomy in Full Details</span>
         </button>
@@ -392,7 +395,7 @@
             <span class="meta-label">Primary Role</span> <span class="meta-value">Movement &amp; Heat</span>
             <span class="meta-label">Key Components</span> <span class="meta-value">600+ Muscles</span>
         </div>
-        <a href="Update/indev.html" class="explore-btn">Explore Muscular System →</a>
+        <a href="Pages/level3/Muscular System.html" class="explore-btn">Explore Muscular System →</a>
     </div>
 
     <div class="slide-content" id="slide-1">
@@ -405,7 +408,7 @@
             <span class="meta-label">Primary Role</span> <span class="meta-value">Support &amp; Protection</span>
             <span class="meta-label">Key Components</span> <span class="meta-value">206 Bones</span>
         </div>
-        <a href="Update/indev.html" class="explore-btn">Explore Skeletal System →</a>
+        <a href="Pages/level3/Skeletal System.html" class="explore-btn">Explore Skeletal System →</a>
     </div>
 
     <div class="slide-content" id="slide-2">
@@ -418,7 +421,7 @@
             <span class="meta-label">Primary Role</span> <span class="meta-value">Transport &amp; Exchange</span>
             <span class="meta-label">Key Components</span> <span class="meta-value">Heart + Vessels</span>
         </div>
-        <a href="Update/indev.html" class="explore-btn">Explore Circulatory System →</a>
+        <a href="Pages/level3/Circulatory System.html" class="explore-btn">Explore Circulatory System →</a>
     </div>
 
     <div class="slide-content" id="slide-3">
@@ -431,7 +434,7 @@
             <span class="meta-label">Primary Role</span> <span class="meta-value">Gas Exchange</span>
             <span class="meta-label">Key Components</span> <span class="meta-value">Lungs + Airways</span>
         </div>
-        <a href="Update/indev.html" class="explore-btn">Explore Respiratory System →</a>
+        <a href="Pages/level3/Respiratory System.html" class="explore-btn">Explore Respiratory System →</a>
     </div>
 
     <div class="slide-content" id="slide-4">
@@ -444,7 +447,7 @@
             <span class="meta-label">Primary Role</span> <span class="meta-value">Control &amp; Sensation</span>
             <span class="meta-label">Key Components</span> <span class="meta-value">Brain + Nerves</span>
         </div>
-        <a href="Update/indev.html" class="explore-btn">Explore Nervous System →</a>
+        <a href="Pages/level3/Nervous System.html" class="explore-btn">Explore Nervous System →</a>
     </div>
 
     <div class="slide-content" id="slide-5">
@@ -457,7 +460,7 @@
             <span class="meta-label">Primary Role</span> <span class="meta-value">Nutrient Absorption</span>
             <span class="meta-label">Key Components</span> <span class="meta-value">Stomach + Intestines</span>
         </div>
-        <a href="Update/indev.html" class="explore-btn">Explore Digestive System →</a>
+        <a href="Pages/level3/Digestive System.html" class="explore-btn">Explore Digestive System →</a>
     </div>
 
     <div class="slide-content" id="slide-6">
@@ -470,7 +473,7 @@
             <span class="meta-label">Primary Role</span> <span class="meta-value">Hormone Regulation</span>
             <span class="meta-label">Key Components</span> <span class="meta-value">Glands &amp; Hormones</span>
         </div>
-        <a href="Update/indev.html" class="explore-btn">Explore Endocrine System →</a>
+        <a href="Pages/level3/Endocrine System.html" class="explore-btn">Explore Endocrine System →</a>
     </div>
 
     <div class="slide-content" id="slide-7">
@@ -483,7 +486,7 @@
             <span class="meta-label">Primary Role</span> <span class="meta-value">Defense &amp; Memory</span>
             <span class="meta-label">Key Components</span> <span class="meta-value">Lymph + Antibodies</span>
         </div>
-        <a href="Update/indev.html" class="explore-btn">Explore Immune System →</a>
+        <a href="Pages/level3/Immune System.html" class="explore-btn">Explore Immune System →</a>
     </div>
 </div>
 
@@ -561,8 +564,8 @@
     };
 
     const systemPages = [
-        "Update/indev.html", "Update/indev.html", "Update/indev.html", "Update/indev.html",
-        "Update/indev.html", "Update/indev.html", "Update/indev.html", "Update/indev.html"
+        "Pages/level3/Muscular System.html", "Pages/level3/Skeletal System.html", "Pages/level3/Circulatory System.html", "Pages/level3/Respiratory System.html",
+        "Pages/level3/Nervous System.html", "Pages/level3/Digestive System.html", "Pages/level3/Endocrine System.html", "Pages/level3/Immune System.html"
     ];
 
     const images = [
@@ -715,6 +718,8 @@
             document.getElementById('ui-layer').classList.add('mouse-right');
         }, 1400);
     }
+
+    window.startGallery = startGallery;
 
     window.addEventListener('wheel', (e) => {
         if (document.getElementById('landing').style.display !== 'none') return;

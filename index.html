@@ -205,7 +205,7 @@
             
             <div class="char black"><div class="cowboy-hat"></div><div class="eye-container"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div><div class="black-smile"></div><div class="eye-container"><div class="lensi lens-left"></div><div class="dandi"></div><div class="lensi lens-right"></div><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div></div>
             <div class="char yellow"><div class="cap"><div class="cap-brim"></div></div><div class="eye-container"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div><div class="yellow-smile"></div></div>
-            
+
             <div class="char white">
                 <div class="eye-container">
                     <div class="panda-patch patch-left">
@@ -529,7 +529,7 @@
         let age = today.getFullYear() - birthDate.getFullYear();
         const m = today.getMonth() - birthDate.getMonth();
         if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
-        
+
         if (age < 3 || age > 100) {
             showBannerMessage('setup', "Please provide a valid Date of Birth (Ages 3 to 100 accepted).");
             return;
