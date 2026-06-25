@@ -20,7 +20,6 @@ refreshSlides();
 
 let sectionWidth = 0;
 
-// Measures section width accurately using un-transformed DOM offset positions
 function measureSection() {
     const totalSlides = slides.length;
     if (totalSlides > 0) {
@@ -32,15 +31,12 @@ function measureSection() {
     }
     return false;
 }
-
-// Initial measurement pass
 requestAnimationFrame(() => {
     if (measureSection()) {
         current = target = sectionWidth;
     }
 });
 
-// Re-verify on full window load to accommodate fully rendered layouts and images
 window.addEventListener("load", () => {
     if (measureSection()) {
         current = target = sectionWidth;
@@ -53,8 +49,6 @@ function lerp(start, end, factor) {
 
 function updateScaleAndPosition() {
     slides.forEach(slide => {
-        // Mathematically stable calculation of slide center relative to the viewport
-        // completely bypassing layout thrashing feedback loops from getBoundingClientRect
         const centerPosition = -current + slide.offsetLeft + slide.offsetWidth / 2;
         const distanceFromCenter = centerPosition - window.innerWidth / 2;
 
@@ -94,7 +88,6 @@ function updateScaleAndPosition() {
 }
 
 function update() {
-    // Dynamic fallback measurement mechanism
     if (sectionWidth === 0) {
         if (measureSection()) {
             current = target = sectionWidth;
@@ -105,8 +98,6 @@ function update() {
 
     if (sectionWidth > 0) {
         const middle = sectionWidth;
-
-        // Perfect looping math around the boundaries
         if (current < middle - sectionWidth / 2) {
             current += sectionWidth;
             target += sectionWidth;
@@ -160,14 +151,13 @@ window.updateInfo = function (name, text) {
     });
 };
 
-// --- Navbar Auto-Hide Feature (Top Hover Only) ---
 let navTimer;
 const navBar = document.querySelector("header.clay-nav");
 let isNavVisible = true;
 
 function hideNav() {
     gsap.to(navBar, {
-        y: -120,      // Slide completely out of view
+        y: -120,     
         opacity: 0,
         duration: 0.5,
         ease: "power2.inOut",
@@ -178,7 +168,7 @@ function hideNav() {
 
 function showNav() {
     gsap.to(navBar, {
-        y: 0,         // Slide back down
+        y: 0,       
         opacity: 1,
         duration: 0.4,
         ease: "power2.out",
@@ -187,22 +177,17 @@ function showNav() {
     isNavVisible = true;
 }
 
-// Track mouse movement to detect if it's in the navbar zone
 window.addEventListener("mousemove", (e) => {
-    // 100 pixels from the top of the screen defines the navbar section
     if (e.clientY <= 100) {
-        clearTimeout(navTimer); // Stop any countdowns while the mouse is up here
+        clearTimeout(navTimer); 
         if (!isNavVisible) {
             showNav();
         }
     } else {
-        // If the mouse leaves the top section and the nav is still open, start the 3s countdown
         if (isNavVisible) {
             clearTimeout(navTimer);
             navTimer = setTimeout(hideNav, 1000);
         }
     }
 });
-
-// Start the initial 3-second countdown right when the page loads
 navTimer = setTimeout(hideNav, 3000);

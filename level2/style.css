@@ -4,30 +4,24 @@
   box-sizing: border-box;
 }
 
-/* Base styling tuned for Dark Mode */
 html, body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   font-family: 'Segoe UI', system-ui, sans-serif;
-  
-  /* Deep dark matte background */
   background: #0f1115;
   color: #e2e8f0; 
 }
 
-/* Header & Navbar Navigation in Flat Dark Style */
 header.clay-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px 40px;
-  
-  /* Dark background with no shadows */
   background: #1a1d24;
   border-radius: 50px; 
   margin: 20px 40px;
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Sleek modern border instead of shadow */
+  border: 1px solid rgba(255, 255, 255, 0.05); 
       
   position: fixed;
   top: 0;
@@ -44,7 +38,7 @@ header h1 {
 
 header h1 a {
   text-decoration: none;
-  color: #7289da; /* Vibrant blurple stands out cleanly in dark mode */
+  color: #7289da; 
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
@@ -60,25 +54,19 @@ header nav a {
 
 header nav a:hover {
   color: #7289da;
-  background: #242933; /* Dark button fill on hover instead of inner shadows */
+  background: #242933; 
 }
 
-/* Info Panel - Styled as a flat dark floating card */
 #info-panel {
   position: fixed;
   top: 7em; 
   right: 6em;
   width: 340px;
   padding: 30px;
-  
-  /* Dark background with no shadows */
   background: #1a1d24;
   border-radius: 35px;
   border: 1px solid rgba(255, 255, 255, 0.05);
-      
   z-index: 1000;
-  
-  /* Start hidden for the JS animation */
   opacity: 0;
   pointer-events: none;
   transform: translateY(-10px);
@@ -149,8 +137,6 @@ p.sub-text {
   align-items: center;
   gap: 149.5px;
 }
-
-/* Base Slide Container */
 .slide {
   position: relative;
   width: 450px;  
@@ -160,8 +146,6 @@ p.sub-text {
   align-items: center;
   background: transparent;
 }
-
-/* Soft Image Corners directly applied to the image */
 .slide img {
   width: 100%;
   height: 100%;
@@ -180,7 +164,6 @@ p.sub-text {
   border-radius: 40px; 
 }
 
-/* Hitboxes */
 .hitbox {
   fill: transparent;
   stroke: transparent;
@@ -193,27 +176,23 @@ p.sub-text {
 
 .hitbox:hover {
   stroke: #7289da;
-  /* Translucent dark-mode friendly highlight */
   fill: rgba(114, 137, 218, 0.15); 
 }
-/* Slide Tags - Flat Dark UI Style */
 .slide-tag {
   position: absolute;
-  bottom: -45px; /* Safely anchors beneath the main image frame */
+  bottom: -45px; 
   left: 50%;
   transform: translateX(-50%);
-  
   background: #1a1d24;
-  color: #7289da; /* Sleek blurple color matches header aesthetic */
+  color: #7289da; 
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 20px;
-  
   padding: 8px 24px;
   font-size: 0.9rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   white-space: nowrap;
-  pointer-events: none; /* Prevents text selection from interrupting scroll hooks */
+  pointer-events: none; 
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
