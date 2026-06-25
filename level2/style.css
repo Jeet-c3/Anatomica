@@ -4,34 +4,30 @@
   box-sizing: border-box;
 }
 
-/* Base styling tuned for Claymorphism */
+/* Base styling tuned for Dark Mode */
 html, body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   font-family: 'Segoe UI', system-ui, sans-serif;
   
-  /* Soft, matte pastel background for the clay effect to pop */
-  background: #e8eef2;
-  color: #4a5568; 
+  /* Deep dark matte background */
+  background: #0f1115;
+  color: #e2e8f0; 
 }
 
-/* Header & Navbar Navigation in Clay Style */
+/* Header & Navbar Navigation in Flat Dark Style */
 header.clay-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px 40px;
   
-  /* The Clay Effect */
-  background: #e8eef2;
+  /* Dark background with no shadows */
+  background: #1a1d24;
   border-radius: 50px; 
   margin: 20px 40px;
-  box-shadow: 
-      10px 10px 20px #d0d8e0, 
-      -10px -10px 20px #ffffff,
-      inset 4px 4px 10px rgba(255, 255, 255, 0.7),
-      inset -4px -4px 10px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Sleek modern border instead of shadow */
       
   position: fixed;
   top: 0;
@@ -48,13 +44,13 @@ header h1 {
 
 header h1 a {
   text-decoration: none;
-  color: #7289da; 
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+  color: #7289da; /* Vibrant blurple stands out cleanly in dark mode */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 header nav a {
   margin-left: 30px;
-  color: #5a6a85;
+  color: #a0aec0;
   text-decoration: none;
   font-weight: 600;
   padding: 10px 20px;
@@ -64,29 +60,21 @@ header nav a {
 
 header nav a:hover {
   color: #7289da;
-  /* Soft embedded clay button effect on hover */
-  background: #e8eef2;
-  box-shadow: 
-      inset 4px 4px 8px #d0d8e0, 
-      inset -4px -4px 8px #ffffff;
+  background: #242933; /* Dark button fill on hover instead of inner shadows */
 }
 
-/* Info Panel - Styled as a floating puffy clay card */
+/* Info Panel - Styled as a flat dark floating card */
 #info-panel {
   position: fixed;
   top: 7em; 
-  right: 2.5em;
+  right: 6em;
   width: 340px;
   padding: 30px;
   
-  /* The Clay Effect */
-  background: #e8eef2;
+  /* Dark background with no shadows */
+  background: #1a1d24;
   border-radius: 35px;
-  box-shadow: 
-      15px 15px 30px #d0d8e0, 
-      -15px -15px 30px #ffffff,
-      inset 6px 6px 15px rgba(255, 255, 255, 0.8),
-      inset -6px -6px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
       
   z-index: 1000;
   
@@ -104,12 +92,12 @@ header nav a:hover {
   text-transform: uppercase;
   color: #7289da;
   letter-spacing: 1px;
-  text-shadow: 1px 1px 2px #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 #info-panel p {
   line-height: 1.6;
-  color: #5a6a85;
+  color: #cbd5e0;
   font-size: 1rem;
   font-weight: 500;
 }
@@ -126,7 +114,6 @@ header nav a:hover {
   z-index: 500;
 }
 
-/* Embossed Clay Text for Background Header */
 p#header.clay-text {
   text-transform: uppercase;
   font-size: 6.5rem;
@@ -134,17 +121,16 @@ p#header.clay-text {
   margin-bottom: 4rem;
   font-weight: 900;
   letter-spacing: -2px;
-  color: #e8eef2;
+  color: #4b87ff;
   
-  /* Makes text look carved directly into the clay wall */
   text-shadow: 
-      3px 3px 6px #c4ceda, 
-      -3px -3px 6px #ffffff;
+      1px 1px 1px rgba(255, 255, 255, 0.05), 
+     -1px -1px 1px rgba(0, 0, 0, 0.8);
 }
 
 p.sub-text {
   font-weight: 600;
-  color: #8b9bb4;
+  color: #4a5568;
 }
 
 .slider {
@@ -164,7 +150,7 @@ p.sub-text {
   gap: 149.5px;
 }
 
-/* Base Slide Container - Now completely transparent */
+/* Base Slide Container */
 .slide {
   position: relative;
   width: 450px;  
@@ -180,7 +166,7 @@ p.sub-text {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  border-radius: 40px; /* Softens the image corners */
+  border-radius: 40px; 
   pointer-events: none;
 }
 
@@ -191,7 +177,7 @@ p.sub-text {
   width: 100%;
   height: 100%;
   z-index: 10;
-  border-radius: 40px; /* Matches the soft image corners */
+  border-radius: 40px; 
 }
 
 /* Hitboxes */
@@ -202,11 +188,32 @@ p.sub-text {
   cursor: pointer;
   pointer-events: auto;
   transition: all 0.3s ease;
-  rx: 15; /* Soft, highly rounded inner box */
+  rx: 15; 
 }
 
 .hitbox:hover {
   stroke: #7289da;
-  /* Soft claymorphic highlight */
+  /* Translucent dark-mode friendly highlight */
   fill: rgba(114, 137, 218, 0.15); 
+}
+/* Slide Tags - Flat Dark UI Style */
+.slide-tag {
+  position: absolute;
+  bottom: -45px; /* Safely anchors beneath the main image frame */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background: #1a1d24;
+  color: #7289da; /* Sleek blurple color matches header aesthetic */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  
+  padding: 8px 24px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+  pointer-events: none; /* Prevents text selection from interrupting scroll hooks */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }

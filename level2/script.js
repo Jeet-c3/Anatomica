@@ -159,3 +159,50 @@ window.updateInfo = function (name, text) {
         ease: "back.out(1.5)"
     });
 };
+
+// --- Navbar Auto-Hide Feature (Top Hover Only) ---
+let navTimer;
+const navBar = document.querySelector("header.clay-nav");
+let isNavVisible = true;
+
+function hideNav() {
+    gsap.to(navBar, {
+        y: -120,      // Slide completely out of view
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.inOut",
+        pointerEvents: "none" 
+    });
+    isNavVisible = false;
+}
+
+function showNav() {
+    gsap.to(navBar, {
+        y: 0,         // Slide back down
+        opacity: 1,
+        duration: 0.4,
+        ease: "power2.out",
+        pointerEvents: "auto"
+    });
+    isNavVisible = true;
+}
+
+// Track mouse movement to detect if it's in the navbar zone
+window.addEventListener("mousemove", (e) => {
+    // 100 pixels from the top of the screen defines the navbar section
+    if (e.clientY <= 100) {
+        clearTimeout(navTimer); // Stop any countdowns while the mouse is up here
+        if (!isNavVisible) {
+            showNav();
+        }
+    } else {
+        // If the mouse leaves the top section and the nav is still open, start the 3s countdown
+        if (isNavVisible) {
+            clearTimeout(navTimer);
+            navTimer = setTimeout(hideNav, 1000);
+        }
+    }
+});
+
+// Start the initial 3-second countdown right when the page loads
+navTimer = setTimeout(hideNav, 3000);
