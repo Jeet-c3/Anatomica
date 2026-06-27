@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomica | About</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', system-ui, sans-serif;
+        }
+
+        body {
+
+            background: linear-gradient(-45deg, #a3a5ff, #8ec6fc, #dec4ff, #ffb6c1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #1e293b;
+            min-height: 100vh;
+            padding-top: 100px;
+            padding-bottom: 50px;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Consistent Header from Gallery/Level1 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5vw;
+            background: rgba(20, 20, 40, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,0.13);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 3000;
+            color: #fff;
+        }
+
+        header h1 {
+            font-size: clamp(20px, 5vw, 26px);
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        header nav a {
+            margin-left: 24px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.25s;
+        }
+
+        header nav a:hover {
+            color: #a0f0ff;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* Page Title Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 20px;
+            animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .page-header h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Claymorphism Grid System */
+        .clay-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        /* Base Clay Card Styles */
+        .clay-card {
+            border-radius: 35px;
+            padding: 40px 30px;
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeIn 1s ease-out backwards;
+            text-align: center;
+        }
+
+        .clay-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .clay-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 25px auto;
+        }
+
+        .clay-card h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        .clay-card p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        /* --- Individual Colored Clay Cards --- */
+        
+        /* 1. Purple/Blue Card (The Mission) */
+        .card-mission {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            box-shadow: 
+                15px 15px 30px rgba(118, 143, 255, 0.3), 
+                -15px -15px 30px rgba(255, 255, 255, 0.6),
+                inset 6px 6px 15px rgba(255, 255, 255, 0.8),
+                inset -6px -6px 15px rgba(118, 143, 255, 0.2);
+            animation-delay: 0.1s;
+        }
+        .card-mission .clay-icon {
+            background: #d4e3ff;
+            color: #3b82f6;
+            box-shadow: inset 4px 4px 8px rgba(255,255,255,0.9), inset -4px -4px 8px rgba(59, 130, 246, 0.2);
+        }
+
+        /* 2. Pink/Orange Card (The Experience) */
+        .card-experience {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            box-shadow: 
+                15px 15px 30px rgba(252, 182, 159, 0.4), 
+                -15px -15px 30px rgba(255, 255, 255, 0.8),
+                inset 6px 6px 15px rgba(255, 255, 255, 0.9),
+                inset -6px -6px 15px rgba(252, 182, 159, 0.2);
+            animation-delay: 0.2s;
+        }
+        .card-experience .clay-icon {
+            background: #ffe4e1;
+            color: #f43f5e;
+            box-shadow: inset 4px 4px 8px rgba(255,255,255,0.9), inset -4px -4px 8px rgba(244, 63, 94, 0.2);
+        }
+
+        /* 3. Mint/Green Card (The Technology) */
+        .card-tech {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            box-shadow: 
+                15px 15px 30px rgba(150, 230, 161, 0.4), 
+                -15px -15px 30px rgba(255, 255, 255, 0.7),
+                inset 6px 6px 15px rgba(255, 255, 255, 0.9),
+                inset -6px -6px 15px rgba(150, 230, 161, 0.3);
+            animation-delay: 0.3s;
+        }
+        .card-tech .clay-icon {
+            background: #e6fffa;
+            color: #10b981;
+            box-shadow: inset 4px 4px 8px rgba(255,255,255,0.9), inset -4px -4px 8px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Tech Stack Tags */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1e293b;
+            box-shadow: 
+                3px 3px 6px rgba(0,0,0,0.05), 
+                -3px -3px 6px rgba(255,255,255,0.8),
+                inset 1px 1px 2px rgba(255,255,255,0.5);
+        }
+
+        /* Full Width Bottom Card */
+        .card-full {
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            grid-column: 1 / -1; /* Spans across all columns */
+            box-shadow: 
+                15px 15px 30px rgba(160, 174, 192, 0.3), 
+                -15px -15px 30px rgba(255, 255, 255, 0.8),
+                inset 6px 6px 15px rgba(255, 255, 255, 0.9),
+                inset -6px -6px 15px rgba(160, 174, 192, 0.2);
+            display: flex;
+            align-items: center;
+            text-align: left;
+            gap: 40px;
+            animation-delay: 0.4s;
+        }
+
+        .card-full .text-content {
+            flex: 1;
+        }
+
+        .card-full .clay-btn {
+            background: #f1f5f9;
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            padding: 16px 32px;
+            border-radius: 50px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 
+                8px 8px 16px rgba(160, 174, 192, 0.4), 
+                -8px -8px 16px rgba(255, 255, 255, 0.9),
+                inset 2px 2px 4px rgba(255,255,255,0.8);
+        }
+
+        .card-full .clay-btn:hover {
+            color: #ffffff;
+            background: #3b82f6;
+            box-shadow: 
+                inset 6px 6px 12px rgba(0, 0, 0, 0.1),
+                inset -6px -6px 12px rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .card-full {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Anatomica</h1>
+        <nav>
+            <a href="gallery.html">Home</a>
+            <a href="profile.html">Profile</a>
+            <a href="about.html">About</a>
+            <a href="Update/indev.html">Test Yourself</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <div class="page-header">
+            <h2>About Anatomica</h2>
+            <p>Integrating science, technology, and interactive design to create a smarter learning experience.</p>
+        </div>
+
+        <div class="clay-grid">
+            
+            <div class="clay-card card-mission">
+                <div class="clay-icon">
+                    <i class="fa-solid fa-microscope"></i>
+                </div>
+                <h3>Our Platform</h3>
+                <p>
+                    Anatomica is an interactive web-based learning platform designed to help students, educators, and enthusiasts explore and understand human anatomy in a clear and engaging way. We present detailed anatomical structures through visually rich illustrations and organized content.
+                </p>
+            </div>
+
+            <div class="clay-card card-experience">
+                <div class="clay-icon">
+                    <i class="fa-solid fa-vr-cardboard"></i>
+                </div>
+                <h3>The Experience</h3>
+                <p>
+                    By simplifying complex biological concepts, Anatomica makes learning about the human body more accessible, structured, and effective. Navigate system by system, view detailed explanations, and interact with dynamic models to enhance your understanding.
+                </p>
+            </div>
+
+            <div class="clay-card card-tech">
+                <div class="clay-icon">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <h3>Under the Hood</h3>
+                <p>
+                    We built Anatomica using modern web standards and design tools to ensure a seamless, educational journey across all devices.
+                </p>
+                <div class="tech-tags">
+                    <span class="tech-tag">HTML5 / CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Three.js / WebGL</span>
+                    <span class="tech-tag">Blender (3D)</span>
+                    <span class="tech-tag">Firebase DB</span>
+                </div>
+            </div>
+
+            <div class="clay-card card-full">
+                <div class="text-content">
+                    <h3>Explore the Human Body Today</h3>
+                    <p>
+                        From the skeletal framework to the complex nervous system, Anatomica empowers you to discover the engine of human life. Start interacting with our visual models and dive deep into biology like never before.
+                    </p>
+                </div>
+                <div>
+                    <a href="gallery.html" class="clay-btn">Start Exploring <i class="fa-solid fa-arrow-right ml-2"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<div class="transition-svg" aria-hidden="true" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; pointer-events: none;">
+    <svg viewBox="0 0 2453 2535" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+      <path d="M227.549 1818.76C227.549 1818.76 406.016 2207.75 569.049 2130.26C843.431 1999.85 -264.104 1002.3 227.549 876.262C552.918 792.849 773.647 2456.11 1342.05 2130.26C1885.43 1818.76 14.9644 455.772 760.548 137.262C1342.05 -111.152 1663.5 2266.35 2209.55 1972.76C2755.6 1679.18 1536.63 384.467 1826.55 137.262C2013.5 -22.1463 2209.55 381.262 2209.55 381.262" stroke="#d8d9d7" stroke-width="700" stroke-linecap="round"/>
+      <path d="M1661.28 2255.51C1661.28 2255.51 2311.09 1960.37 2111.78 1817.01C1944.47 1696.67 718.456 2870.17 499.781 2255.51C308.969 1719.17 2457.51 1613.83 2111.78 963.512C1766.05 313.198 427.949 2195.17 132.281 1455.51C-155.219 736.292 2014.78 891.514 1708.78 252.012C1437.81 -314.29 369.471 909.169 132.281 566.512C18.1772 401.672 244.781 193.012 244.781 193.012" stroke="#6e44ff" stroke-width="700" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  
+  <script src="/transition.js"></script>
+</body>
+</html>

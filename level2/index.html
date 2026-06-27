@@ -3,22 +3,23 @@
 <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <title>Anatomica | Interactive Systems</title>
+   <title>Anatomica | Middle School</title>
    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
    <header class="clay-nav">
-      <h1><a href="../../gallery.html">Anatomica</a></h1>
+      <h1><a href="../gallery.html">Anatomica</a></h1>
       <nav>
-         <a href="../../gallery.html">Home</a>
-         <a href="../../Update/indev.html">About</a>
-         <a href="../../Update/indev.html">Test Yourself</a>
+         <a href="../gallery.html">Home</a>
+         <a href="../profile.html">Profile</a>
+         <a href="../about.html">About</a>
+         <a href="../Update/indev.html">Test Yourself</a>
       </nav>
    </header>
 
    <div id="info-panel" class="clay-card">
       <h2 id="title">Explore Systems</h2>
-      <p id="description">Scroll to view different anatomical systems. Click the highlighted areas on the centered figure to learn more.</p>
+      <p id="description">Scroll or click the side cards to view different anatomical systems. Click the highlighted areas on the centered figure to learn more.</p>
    </div>
 
    <div class="sidebar">
@@ -32,106 +33,132 @@
       <div class="slider-wrapper">
          
          <div class="slide">
-            <img src="../../images/lable_skeletal_tran.png" alt="Skeletal System" />
-            <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
-                <rect class="hitbox" x="100" y="35" width="160" height="45" onclick="updateInfo('Skull', 'Protects the brain and forms the structure of the face.')" />
-                <rect class="hitbox" x="75" y="97" width="180" height="40" onclick="updateInfo('Mandible', 'Lower jaw bone used for chewing and speaking.')" />
-                <rect class="hitbox" x="80" y="170" width="180" height="40" onclick="updateInfo('Clavicle', 'Collarbone connecting arm to the body.')" />
-                <rect class="hitbox" x="80" y="230" width="140" height="40" onclick="updateInfo('Ribs', 'Protect the heart and lungs.')" />
-                <rect class="hitbox" x="80" y="290" width="180" height="40" onclick="updateInfo('Sternum', 'Breastbone connecting ribs in the chest.')" />
-                <rect class="hitbox" x="10" y="345" width="280" height="72" onclick="updateInfo('Vertebral Column', 'Upper spine supporting the head and neck.')" />
-                <rect class="hitbox" x="80" y="540" width="180" height="40" onclick="updateInfo('Pelvis', 'Supports body weight and connects spine to legs.')" />
-                <rect class="hitbox" x="105" y="670" width="140" height="45" onclick="updateInfo('Femur', 'Thigh bone, strongest bone in the body.')" />
-                <rect class="hitbox" x="630" y="290" width="160" height="40" onclick="updateInfo('Humerus', 'Upper arm bone.')" />
-                <rect class="hitbox" x="630" y="405" width="160" height="40" onclick="updateInfo('Radius', 'Forearm bone on thumb side.')" />
-                <rect class="hitbox" x="630" y="445" width="100" height="40" onclick="updateInfo('Ulna', 'Forearm bone on pinky side.')" />
-                <rect class="hitbox" x="140" y="850" width="80" height="40" onclick="updateInfo('Tibia', 'Main weight-bearing bone of lower leg.')" />
-            </svg>
-            <div class="slide-tag">Skeletal System</div>
+            <div class="slide-inner">
+               <img src="../../images/lable_skeletal_tran.png" alt="Skeletal System" />
+               <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
+                   <rect class="hitbox" x="100" y="35" width="160" height="45" onclick="updateInfo('Skull', 'Protects the brain and forms the structure of the face.')" />
+                   <rect class="hitbox" x="75" y="97" width="180" height="40" onclick="updateInfo('Mandible', 'Lower jaw bone used for chewing and speaking.')" />
+                   <rect class="hitbox" x="80" y="170" width="180" height="40" onclick="updateInfo('Clavicle', 'Collarbone connecting arm to the body.')" />
+                   <rect class="hitbox" x="80" y="230" width="140" height="40" onclick="updateInfo('Ribs', 'Protect the heart and lungs.')" />
+                   <rect class="hitbox" x="80" y="290" width="180" height="40" onclick="updateInfo('Sternum', 'Breastbone connecting ribs in the chest.')" />
+                   <rect class="hitbox" x="10" y="345" width="280" height="72" onclick="updateInfo('Vertebral Column', 'Upper spine supporting the head and neck.')" />
+                   <rect class="hitbox" x="80" y="540" width="180" height="40" onclick="updateInfo('Pelvis', 'Supports body weight and connects spine to legs.')" />
+                   <rect class="hitbox" x="105" y="670" width="140" height="45" onclick="updateInfo('Femur', 'Thigh bone, strongest bone in the body.')" />
+                   <rect class="hitbox" x="630" y="290" width="160" height="40" onclick="updateInfo('Humerus', 'Upper arm bone.')" />
+                   <rect class="hitbox" x="630" y="405" width="160" height="40" onclick="updateInfo('Radius', 'Forearm bone on thumb side.')" />
+                   <rect class="hitbox" x="630" y="445" width="100" height="40" onclick="updateInfo('Ulna', 'Forearm bone on pinky side.')" />
+                   <rect class="hitbox" x="140" y="850" width="80" height="40" onclick="updateInfo('Tibia', 'Main weight-bearing bone of lower leg.')" />
+               </svg>
+               <div class="slide-tag">Skeletal System</div>
+            </div>
          </div>
 
          <div class="slide">
-            <img src="../../images/lable_muscular_tran.png" alt="Muscular System" />
-            <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
-                <rect class="hitbox" x="350" y="220" width="150" height="50" onclick="updateInfo('Pectoralis Major', 'Thick, fan-shaped muscle situated at the chest.')" />
-                <rect class="hitbox" x="250" y="300" width="80" height="80" onclick="updateInfo('Biceps Brachii', 'Muscle on the front part of the upper arm involved in lifting.')" />
-                <rect class="hitbox" x="370" y="320" width="110" height="100" onclick="updateInfo('Rectus Abdominis', 'Paired muscle running vertically on each side of the anterior wall of the human abdomen.')" />
-                <rect class="hitbox" x="350" y="550" width="150" height="120" onclick="updateInfo('Quadriceps', 'Group of muscles located in the front of the thigh.')" />
-            </svg>
-            <div class="slide-tag">Muscular System</div>
+            <div class="slide-inner">
+               <img src="../../images/lable_muscular_tran.png" alt="Muscular System" />
+               <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
+                   <rect class="hitbox" x="350" y="220" width="150" height="50" onclick="updateInfo('Pectoralis Major', 'Thick, fan-shaped muscle situated at the chest.')" />
+                   <rect class="hitbox" x="250" y="300" width="80" height="80" onclick="updateInfo('Biceps Brachii', 'Muscle on the front part of the upper arm involved in lifting.')" />
+                   <rect class="hitbox" x="370" y="320" width="110" height="100" onclick="updateInfo('Rectus Abdominis', 'Paired muscle running vertically on each side of the anterior wall of the human abdomen.')" />
+                   <rect class="hitbox" x="350" y="550" width="150" height="120" onclick="updateInfo('Quadriceps', 'Group of muscles located in the front of the thigh.')" />
+               </svg>
+               <div class="slide-tag">Muscular System</div>
+            </div>
          </div>
 
          <div class="slide">
-            <img src="../../images/lable_circulatory_tran.png" alt="Circulatory System" />
-            <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
-                <rect class="hitbox" x="390" y="260" width="70" height="70" onclick="updateInfo('Heart', 'Pumps oxygenated blood to the body and deoxygenated blood to the lungs.')" />
-                <rect class="hitbox" x="400" y="150" width="50" height="60" onclick="updateInfo('Jugular Vein & Carotid Artery', 'Major blood vessels passing through the neck to supply and drain the brain.')" />
-                <rect class="hitbox" x="380" y="350" width="90" height="150" onclick="updateInfo('Descending Aorta & Vena Cava', 'The main artery and vein running down the core of the body.')" />
-                <rect class="hitbox" x="320" y="600" width="60" height="150" onclick="updateInfo('Femoral Artery', 'Large artery in the thigh and the main arterial supply to the thigh and leg.')" />
-            </svg>
-            <div class="slide-tag">Circulatory System</div>
+            <div class="slide-inner">
+               <img src="../../images/lable_circulatory_tran.png" alt="Circulatory System" />
+               <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
+                   <rect class="hitbox" x="390" y="260" width="70" height="70" onclick="updateInfo('Heart', 'Pumps oxygenated blood to the body and deoxygenated blood to the lungs.')" />
+                   <rect class="hitbox" x="400" y="150" width="50" height="60" onclick="updateInfo('Jugular Vein & Carotid Artery', 'Major blood vessels passing through the neck to supply and drain the brain.')" />
+                   <rect class="hitbox" x="380" y="350" width="90" height="150" onclick="updateInfo('Descending Aorta & Vena Cava', 'The main artery and vein running down the core of the body.')" />
+                   <rect class="hitbox" x="320" y="600" width="60" height="150" onclick="updateInfo('Femoral Artery', 'Large artery in the thigh and the main arterial supply to the thigh and leg.')" />
+               </svg>
+               <div class="slide-tag">Circulatory System</div>
+            </div>
          </div>
 
          <div class="slide">
-            <img src="../../images/lable_digestive_tran.png" alt="Digestive System" />
-            <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
-                <rect class="hitbox" x="400" y="150" width="50" height="120" onclick="updateInfo('Esophagus', 'Muscular tube connecting the throat with the stomach.')" />
-                <rect class="hitbox" x="350" y="320" width="100" height="80" onclick="updateInfo('Liver', 'Filters blood coming from the digestive tract and secretes bile.')" />
-                <rect class="hitbox" x="450" y="340" width="80" height="60" onclick="updateInfo('Stomach', 'Breaks down and digests food in order to extract nutrients.')" />
-                <rect class="hitbox" x="370" y="420" width="110" height="90" onclick="updateInfo('Small Intestine', 'Absorbs most of the nutrients from what we eat and drink.')" />
-                <rect class="hitbox" x="350" y="400" width="150" height="120" onclick="updateInfo('Large Intestine', 'Absorbs water and forms feces (stool).')" fill="transparent" />
-            </svg>
-            <div class="slide-tag">Digestive System</div>
+            <div class="slide-inner">
+               <img src="../../images/lable_digestive_tran.png" alt="Digestive System" />
+               <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
+                   <rect class="hitbox" x="400" y="150" width="50" height="120" onclick="updateInfo('Esophagus', 'Muscular tube connecting the throat with the stomach.')" />
+                   <rect class="hitbox" x="350" y="320" width="100" height="80" onclick="updateInfo('Liver', 'Filters blood coming from the digestive tract and secretes bile.')" />
+                   <rect class="hitbox" x="450" y="340" width="80" height="60" onclick="updateInfo('Stomach', 'Breaks down and digests food in order to extract nutrients.')" />
+                   <rect class="hitbox" x="370" y="420" width="110" height="90" onclick="updateInfo('Small Intestine', 'Absorbs most of the nutrients from what we eat and drink.')" />
+                   <rect class="hitbox" x="350" y="400" width="150" height="120" onclick="updateInfo('Large Intestine', 'Absorbs water and forms feces (stool).')" fill="transparent" />
+               </svg>
+               <div class="slide-tag">Digestive System</div>
+            </div>
          </div>
 
          <div class="slide">
-            <img src="../../images/lable_endocrine_tran.png" alt="Endocrine System" />
-            <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
-                <rect class="hitbox" x="400" y="50" width="50" height="40" onclick="updateInfo('Pituitary & Pineal Glands', 'Master glands in the brain regulating growth, sleep, and other endocrine glands.')" />
-                <rect class="hitbox" x="400" y="150" width="50" height="40" onclick="updateInfo('Thyroid Gland', 'Regulates the bodys metabolic rate, heart and digestive function.')" />
-                <rect class="hitbox" x="420" y="380" width="80" height="40" onclick="updateInfo('Pancreas', 'Produces insulin and glucagon to regulate blood sugar levels.')" />
-                <rect class="hitbox" x="380" y="320" width="90" height="40" onclick="updateInfo('Adrenal Glands', 'Produces hormones that help regulate your metabolism, immune system, and response to stress.')" />
-            </svg>
-            <div class="slide-tag">Endocrine System</div>
+            <div class="slide-inner">
+               <img src="../../images/lable_endocrine_tran.png" alt="Endocrine System" />
+               <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
+                   <rect class="hitbox" x="400" y="50" width="50" height="40" onclick="updateInfo('Pituitary & Pineal Glands', 'Master glands in the brain regulating growth, sleep, and other endocrine glands.')" />
+                   <rect class="hitbox" x="400" y="150" width="50" height="40" onclick="updateInfo('Thyroid Gland', 'Regulates the bodys metabolic rate, heart and digestive function.')" />
+                   <rect class="hitbox" x="420" y="380" width="80" height="40" onclick="updateInfo('Pancreas', 'Produces insulin and glucagon to regulate blood sugar levels.')" />
+                   <rect class="hitbox" x="380" y="320" width="90" height="40" onclick="updateInfo('Adrenal Glands', 'Produces hormones that help regulate your metabolism, immune system, and response to stress.')" />
+               </svg>
+               <div class="slide-tag">Endocrine System</div>
+            </div>
          </div>
 
          <div class="slide">
-            <img src="../../images/lable_immune_tran.png" alt="Immune System" />
-            <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
-                <rect class="hitbox" x="400" y="150" width="50" height="50" onclick="updateInfo('Tonsils & Adenoids', 'First line of defense in the immune system, catching incoming pathogens.')" />
-                <rect class="hitbox" x="390" y="240" width="70" height="50" onclick="updateInfo('Thymus', 'Produces T-cells, which are critical for the adaptive immune system.')" />
-                <rect class="hitbox" x="460" y="320" width="40" height="50" onclick="updateInfo('Spleen', 'Filters the blood and helps fight certain kinds of bacteria.')" />
-                <rect class="hitbox" x="380" y="500" width="90" height="60" onclick="updateInfo('Lymph Nodes (Inguinal)', 'Small structures that work as filters for harmful substances.')" />
-            </svg>
-            <div class="slide-tag">Immune System</div>
+            <div class="slide-inner">
+               <img src="../../images/lable_immune_tran.png" alt="Immune System" />
+               <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
+                   <rect class="hitbox" x="400" y="150" width="50" height="50" onclick="updateInfo('Tonsils & Adenoids', 'First line of defense in the immune system, catching incoming pathogens.')" />
+                   <rect class="hitbox" x="390" y="240" width="70" height="50" onclick="updateInfo('Thymus', 'Produces T-cells, which are critical for the adaptive immune system.')" />
+                   <rect class="hitbox" x="460" y="320" width="40" height="50" onclick="updateInfo('Spleen', 'Filters the blood and helps fight certain kinds of bacteria.')" />
+                   <rect class="hitbox" x="380" y="500" width="90" height="60" onclick="updateInfo('Lymph Nodes (Inguinal)', 'Small structures that work as filters for harmful substances.')" />
+               </svg>
+               <div class="slide-tag">Immune System</div>
+            </div>
          </div>
 
          <div class="slide">
-            <img src="../../images/lable_nervous_tran.png" alt="Nervous System" />
-            <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
-                <rect class="hitbox" x="380" y="30" width="90" height="90" onclick="updateInfo('Brain', 'Central control center for the body, responsible for thoughts, memory, and voluntary movement.')" />
-                <rect class="hitbox" x="410" y="130" width="30" height="300" onclick="updateInfo('Spinal Cord', 'Highway for communication between the body and the brain.')" />
-                <rect class="hitbox" x="250" y="450" width="60" height="150" onclick="updateInfo('Peripheral Nerves (Arm)', 'Transmits signals from the central nervous system to the arms and hands.')" />
-                <rect class="hitbox" x="320" y="600" width="60" height="200" onclick="updateInfo('Sciatic Nerve', 'The longest and thickest nerve in the body, supplying the lower extremities.')" />
-            </svg>
-            <div class="slide-tag">Nervous System</div>
+            <div class="slide-inner">
+               <img src="../../images/lable_nervous_tran.png" alt="Nervous System" />
+               <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
+                   <rect class="hitbox" x="380" y="30" width="90" height="90" onclick="updateInfo('Brain', 'Central control center for the body, responsible for thoughts, memory, and voluntary movement.')" />
+                   <rect class="hitbox" x="410" y="130" width="30" height="300" onclick="updateInfo('Spinal Cord', 'Highway for communication between the body and the brain.')" />
+                   <rect class="hitbox" x="250" y="450" width="60" height="150" onclick="updateInfo('Peripheral Nerves (Arm)', 'Transmits signals from the central nervous system to the arms and hands.')" />
+                   <rect class="hitbox" x="320" y="600" width="60" height="200" onclick="updateInfo('Sciatic Nerve', 'The longest and thickest nerve in the body, supplying the lower extremities.')" />
+               </svg>
+               <div class="slide-tag">Nervous System</div>
+            </div>
          </div>
 
          <div class="slide">
-            <img src="../../images/lable_respiratory_tran.png" alt="Respiratory System" />
-            <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
-                <rect class="hitbox" x="400" y="120" width="50" height="80" onclick="updateInfo('Trachea (Windpipe)', 'Tube connecting the larynx to the bronchi of the lungs.')" />
-                <rect class="hitbox" x="340" y="210" width="80" height="120" onclick="updateInfo('Right Lung', 'Extracts oxygen from the atmosphere and transfers it into the bloodstream.')" />
-                <rect class="hitbox" x="430" y="210" width="80" height="120" onclick="updateInfo('Left Lung', 'Slightly smaller than the right lung to make room for the heart.')" />
-                <rect class="hitbox" x="350" y="340" width="150" height="40" onclick="updateInfo('Diaphragm', 'Primary muscle used in the process of inspiration (inhalation).')" />
-            </svg>
-            <div class="slide-tag">Respiratory System</div>
+            <div class="slide-inner">
+               <img src="../../images/lable_respiratory_tran.png" alt="Respiratory System" />
+               <svg class="overlay-svg" viewBox="0 0 850 1133" xmlns="http://www.w3.org/2000/svg">
+                   <rect class="hitbox" x="400" y="120" width="50" height="80" onclick="updateInfo('Trachea (Windpipe)', 'Tube connecting the larynx to the bronchi of the lungs.')" />
+                   <rect class="hitbox" x="340" y="210" width="80" height="120" onclick="updateInfo('Right Lung', 'Extracts oxygen from the atmosphere and transfers it into the bloodstream.')" />
+                   <rect class="hitbox" x="430" y="210" width="80" height="120" onclick="updateInfo('Left Lung', 'Slightly smaller than the right lung to make room for the heart.')" />
+                   <rect class="hitbox" x="350" y="340" width="150" height="40" onclick="updateInfo('Diaphragm', 'Primary muscle used in the process of inspiration (inhalation).')" />
+               </svg>
+               <div class="slide-tag">Respiratory System</div>
+            </div>
          </div>
 
       </div>
    </div>
+  <div class="transition-svg" aria-hidden="true" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; pointer-events: none; overflow: hidden; display: flex; align-items: center; justify-content: center; margin: 0; padding: 0;">
+    <svg viewBox="0 0 2453 2535" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position: absolute; width: 120vw; height: 120vh;">
+      <path d="M227.549 1818.76C227.549 1818.76 406.016 2207.75 569.049 2130.26C843.431 1999.85 -264.104 1002.3 227.549 876.262C552.918 792.849 773.647 2456.11 1342.05 2130.26C1885.43 1818.76 14.9644 455.772 760.548 137.262C1342.05 -111.152 1663.5 2266.35 2209.55 1972.76C2755.6 1679.18 1536.63 384.467 1826.55 137.262C2013.5 -22.1463 2209.55 381.262 2209.55 381.262" stroke-linecap="round"/>
+      <path d="M1661.28 2255.51C1661.28 2255.51 2311.09 1960.37 2111.78 1817.01C1944.47 1696.67 718.456 2870.17 499.781 2255.51C308.969 1719.17 2457.51 1613.83 2111.78 963.512C1766.05 313.198 427.949 2195.17 132.281 1455.51C-155.219 736.292 2014.78 891.514 1708.78 252.012C1437.81 -314.29 369.471 909.169 132.281 566.512C18.1772 401.672 244.781 193.012 244.781 193.012" stroke-linecap="round"/>
+    </svg>
+  </div>
 
-   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  
+  <script src="/transition.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
    <script src="script.js"></script>
 </body>
 </html>
