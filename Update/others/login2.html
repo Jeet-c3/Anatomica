@@ -521,7 +521,11 @@
 
         alert("Welcome to Anatomica! 🎉\n\nYour profile is ready!");
         
-        window.location.href = "gallery.html"; 
+        if (window.playTransitionAndRedirect) {
+    window.playTransitionAndRedirect("gallery.html");
+} else {
+    window.location.href = "gallery.html"; // Fallback
+} 
     });
 </script>
 </body>

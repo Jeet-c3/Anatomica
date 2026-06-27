@@ -1,70 +1,102 @@
-// ===== Colorful Global Transition Engine (Relaxed & Refined) =====
+// ===== Dual-Layer SVG Page Transition Engine =====
 document.addEventListener("DOMContentLoaded", () => {
   const svgEl = document.querySelector(".transition-svg svg");
   if (!svgEl) return;
   
+  // The SVG should contain exactly 2 paths for the layered effect
   const paths = Array.from(svgEl.querySelectorAll("path"));
 
-  // 🎨 COLOR DICTIONARY: Set the colors for each page destination
-  function getTransitionColor(url) {
-    if (url.includes("about.html")) return  "#a3a5ff";   // Light Blue
-    if (url.includes("level1")) return "#afcdf2";       // Light Pink
-    if (url.includes("level2")) return "#222939";       // Ash
-    if (url.includes("gallery.html")) return "#a3a5ff"; // Sky Blue (Level 3 / Home)
-    if (url.includes("profile.html")) return "#aad7ff"; // Light Cyan
-    if (url.includes("index.html")) return "#2764fd";   // Light Green (Login)
+  // 🎨 DUAL-TONE DICTIONARY: Set background (bg) and foreground (fg) colors
+  function getTransitionColors(url) {
+    if (url.includes("about.html")) return { bg: "#e0e7ff", fg: "#a3a5ff" };
+    if (url.includes("level1")) return { bg: "#ff6cf3e9", fg: "#afcdf2" };
+    if (url.includes("level2")) return { bg: "#d8d9d7", fg: "#222939" };
+    if (url.includes("gallery.html")) return { bg: "#e0e7ff", fg: "#a3a5ff" };
+    if (url.includes("profile.html")) return { bg: "#ffffff", fg: "#b6cef1" };
+    if (url.includes("index.html")) return { bg: "#d5f556", fg: "#2764fd" };
     
-    return "#5500ff"; // Default backup color
+    // Default fallback (Matches the exact colors from your inspiration file)
+    return { bg: "#d8d9d7", fg: "#6e44ff" }; 
   }
 
-  // Set the colors instantly when the page loads based on the CURRENT page
-  const currentColor = getTransitionColor(window.location.href);
-  paths.forEach((path) => {
+  // 1. Setup Initial State (Matches the end state of a "cover" animation)
+  const currentColors = getTransitionColors(window.location.href);
+  
+  paths.forEach((path, index) => {
     const length = path.getTotalLength();
     path.style.strokeDasharray = length;
-    path.style.strokeDashoffset = 0; 
-    path.setAttribute("stroke", currentColor); 
-    path.setAttribute("stroke-width", "200"); // Reduced from 2000 for a better brush texture
+    path.style.strokeDashoffset = 0; // Start fully covering the screen
+    path.setAttribute("stroke-width", "600"); // Thick stroke for full coverage
+    
+    // Index 0 is the bottom path (bg), Index 1 is the top path (fg)
+    path.setAttribute("stroke", index === 0 ? currentColors.bg : currentColors.fg); 
   });
 
-  // Wipes the brush strokes away to reveal the newly loaded page
+  // 2. Reveal Animation (Corresponds to enter() in the inspiration)
   function revealPage() {
     return new Promise((resolve) => {
       const tween = gsap.timeline({ onComplete: resolve });
       paths.forEach((path) => {
         const length = path.getTotalLength();
-        tween.to(path, {
-          strokeDashoffset: -length,
-          attr: { "stroke-width": 400 },
-          duration: 1.2, // SLOWED DOWN: Changed from 0.8 to 1.2 seconds
-          ease: "power2.inOut",
-        }, 0);
+        tween.to(
+          path,
+          {
+            strokeDashoffset: -length,     // Sweep off-screen
+            attr: { "stroke-width": 200 }, // Taper the stroke down as it leaves
+            duration: 1.3,                   // Matching inspiration timing
+            ease: "power1.inOut",          // Matching inspiration ease
+            onComplete: () => {
+              // Invisibly reset the path to the starting side for the next transition
+              gsap.set(path, { strokeDashoffset: length });
+            }
+          },
+          0
+        );
       });
     });
   }
 
-  // Draws the brush strokes back over the screen when clicking to leave a page
-  function coverPage(targetColor) {
+  // 3. Cover Animation (Corresponds to leave() in the inspiration)
+  function coverPage(targetColors) {
     return new Promise((resolve) => {
-      // Change brush color to match the NEXT page
-      paths.forEach(path => path.setAttribute("stroke", targetColor));
+      // Set the stroke colors based on the page we are about to navigate to
+      paths.forEach((path, index) => {
+        path.setAttribute("stroke", index === 0 ? targetColors.bg : targetColors.fg);
+      });
 
       const tween = gsap.timeline({ onComplete: resolve });
       paths.forEach((path) => {
-        tween.to(path, {
-          strokeDashoffset: 0,
-          attr: { "stroke-width": 200 }, // Reduced from 2000
-          duration: 1.2, // SLOWED DOWN: Changed from 0.8 to 1.2 seconds
-          ease: "power2.inOut",
-        }, 0);
+        const length = path.getTotalLength();
+        
+        // Ensure path starts at the invisible ready position with a tapered width
+        gsap.set(path, { strokeDashoffset: length, attr: { "stroke-width": 200 } });
+
+        tween.to(
+          path,
+          {
+            strokeDashoffset: 0,           // Fill the screen
+            attr: { "stroke-width": 600 }, // Expand stroke for gapless coverage
+            duration: 1.3,                   // Matching inspiration timing
+            ease: "power1.inOut",          // Matching inspiration ease
+          },
+          0
+        );
       });
     });
   }
 
-  // Run the opening reveal immediately
+  // EXPORT TO WINDOW: Allow other scripts (like Firebase Auth) to trigger this manually
+  window.playTransitionAndRedirect = function(url) {
+      const targetColors = getTransitionColors(url);
+      coverPage(targetColors).then(() => {
+          window.location.href = url;
+      });
+  };
+
+  // Run the opening reveal immediately on page load
   revealPage();
 
-  // Intercept all menu clicks across all folders seamlessly
+  // Intercept standard anchor clicks for smooth routing
   document.body.addEventListener("click", (e) => {
     const link = e.target.closest("a");
 
@@ -73,18 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
       link.href &&
       link.origin === window.location.origin &&
       !link.getAttribute("href").startsWith("#") &&
+      !link.getAttribute("href").startsWith("javascript") &&
       link.getAttribute("target") !== "_blank"
     ) {
       e.preventDefault(); 
       const targetUrl = link.href;
-      
-      // Determine what color the wipe should be based on where we are going
-      const targetColor = getTransitionColor(targetUrl);
-
-      // Play closing animation with the new color, then move folders smoothly
-      coverPage(targetColor).then(() => {
-        window.location.href = targetUrl;
-      });
+      window.playTransitionAndRedirect(targetUrl);
     }
   });
 });

@@ -486,7 +486,11 @@
                 const snapshot = await get(ref(db, 'users/' + user.uid));
                 if (snapshot.exists()) {
                     localStorage.setItem('currentUser', tempEmail);
-                    window.location.href = "gallery.html"; 
+                    if (window.playTransitionAndRedirect) {
+    window.playTransitionAndRedirect("gallery.html");
+} else {
+    window.location.href = "gallery.html"; // Fallback
+} 
                 } else {
                     isGoogleUser = false;
                     loginForm.style.display = 'none';
@@ -564,7 +568,11 @@
             localStorage.setItem('currentUser', tempEmail);
             
             // Navigate cleanly to main gallery
-            window.location.href = "gallery.html";  
+            if (window.playTransitionAndRedirect) {
+    window.playTransitionAndRedirect("gallery.html");
+} else {
+    window.location.href = "gallery.html"; // Fallback
+}  
         } catch (error) {
             showBannerMessage('setup', "Failed to build database profile: " + error.message);
         }
@@ -581,7 +589,11 @@
             const snapshot = await get(ref(db, 'users/' + user.uid));
             if (snapshot.exists()) {
                 localStorage.setItem('currentUser', user.email);
-                window.location.href = "gallery.html";
+                if (window.playTransitionAndRedirect) {
+    window.playTransitionAndRedirect("gallery.html");
+} else {
+    window.location.href = "gallery.html"; // Fallback
+}
             } else {
                 isGoogleUser = true;
                 googleUid = user.uid;
@@ -610,7 +622,11 @@
             const snapshot = await get(ref(db, 'users/' + user.uid));
             if (snapshot.exists()) {
                 localStorage.setItem('currentUser', user.email || user.providerData[0].email);
-                window.location.href = "gallery.html";
+                if (window.playTransitionAndRedirect) {
+    window.playTransitionAndRedirect("gallery.html");
+} else {
+    window.location.href = "gallery.html"; // Fallback
+}
             } else {
                 isGoogleUser = true;
                 googleUid = user.uid;
