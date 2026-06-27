@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anatomica | Kids Edition</title>
     <style>
-        /* Smooth scrolling setup */
         html {
             scroll-behavior: smooth;
         }
@@ -18,14 +17,11 @@
         }
 
         body {
-            background-color: #f0f5fa;
-            color: #2d3748;
-            padding-top: 80px; /* Offset for the fixed header */
+            background-color: #dce5f0;
+            color: #1e293b;
+            padding-top: 80px;
         }
 
-        /* -------------------------------------------
-           GLOBAL NAVIGATION BAR (From gallery.html) 
-        ------------------------------------------- */
         header {
             display: flex;
             justify-content: space-between;
@@ -61,9 +57,6 @@
             color: #a0f0ff;
         }
 
-        /* -------------------------------------------
-           CLAYMORPHISM SUB-MENU NAVIGATION
-        ------------------------------------------- */
         .sub-nav-container {
             max-width: 1000px;
             margin: 30px auto 10px;
@@ -71,104 +64,134 @@
         }
 
         .sub-nav {
-            background: #ffffff;
+            background: #f1f5f9;
             border-radius: 30px;
             padding: 15px;
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
-            gap: 10px;
-            /* Claymorphism styles */
-            box-shadow: 9px 9px 18px #d1d9e6, 
-                        -9px -9px 18px #ffffff, 
-                        inset 3px 3px 6px rgba(255, 255, 255, 0.8), 
-                        inset -3px -3px 6px rgba(0, 0, 0, 0.05);
+            gap: 12px;
+            box-shadow: 10px 10px 20px #b8c4d4, 
+                        -10px -10px 20px #ffffff, 
+                        inset 3px 3px 6px rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .sub-nav a {
-            color: #4a5568;
             text-decoration: none;
             font-weight: 700;
-            padding: 10px 24px;
+            padding: 12px 24px;
             border-radius: 20px;
-            background: #f7fafc;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 4px 4px 8px #d1d9e6, 
+            box-shadow: 4px 4px 8px #cbd5e1, 
                         -4px -4px 8px #ffffff, 
-                        inset 2px 2px 4px #ffffff;
+                        inset 2px 2px 4px rgba(255, 255, 255, 0.6);
         }
 
         .sub-nav a:hover {
             transform: translateY(-3px);
-            color: #ffffff;
-            background: #6c5ce7;
-            box-shadow: 0px 10px 20px rgba(108, 92, 231, 0.3);
+            color: #ffffff !important;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
         }
 
-        /* -------------------------------------------
-           MAIN BODY CONTAINERS & SYSTEM CARDS
-        ------------------------------------------- */
+        .sub-nav a.btn-dig {
+            background: #e6f4ff;
+            color: #004085;
+            border: 2px solid #bae0ff;
+        }
+        .sub-nav a.btn-dig:hover {
+            background: #007bff;
+        }
+
+        .sub-nav a.btn-resp {
+            background: #fffbe6;
+            color: #856404;
+            border: 2px solid #ffe58f;
+        }
+        .sub-nav a.btn-resp:hover {
+            background: #e0a800;
+        }
+
+        .sub-nav a.btn-skel {
+            background: #f6ffed;
+            color: #1e4620;
+            border: 2px solid #b7eb8f;
+        }
+        .sub-nav a.btn-skel:hover {
+            background: #4caf50;
+        }
+
+        .sub-nav a.btn-endo {
+            background: #fff0f6;
+            color: #721c24;
+            border: 2px solid #ffd6e7;
+        }
+        .sub-nav a.btn-endo:hover {
+            background: #e91e63;
+        }
+
         .container {
             max-width: 1000px;
             margin: 0 auto 50px;
             padding: 0 20px;
         }
 
-        /* Prevent system sections from getting cut off by fixed navigation */
         section {
-            scroll-margin-top: 100px;
+            scroll-margin-top: 120px;
         }
 
-        /* Claymorphism Inflated System Card */
         .system-card {
-            background-color: #ffffff;
             border-radius: 40px;
             margin-top: 40px;
             padding: 40px;
             display: flex;
             flex-direction: column;
             gap: 30px;
-            transition: transform 0.3s ease;
             position: relative;
+            box-shadow: 15px 15px 35px #b5c2d4, 
+                        -15px -15px 35px #ffffff, 
+                        inset 12px 12px 25px rgba(255, 255, 255, 0.8);
         }
 
-        /* Claymorphism Color Variations */
         #digestive {
-            box-shadow: 15px 15px 35px #d1d9e6, 
-                        -15px -15px 35px #ffffff, 
-                        inset -12px -12px 25px rgba(255, 118, 117, 0.05), 
-                        inset 12px 12px 25px rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 118, 117, 0.15);
+            background-color: #e6f4ff;
+            border: 2px solid #bae0ff;
+            inset: -12px -12px 25px rgba(0, 123, 255, 0.05);
         }
+        #digestive .system-title { color: #004085; }
+        #digestive .info-box h3 { color: #0056b3; }
+        #digestive .info-box ul li::before { background-color: #007bff; }
 
         #respiratory {
-            box-shadow: 15px 15px 35px #d1d9e6, 
-                        -15px -15px 35px #ffffff, 
-                        inset -12px -12px 25px rgba(116, 185, 255, 0.05), 
-                        inset 12px 12px 25px rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(116, 185, 255, 0.15);
+            background-color: #fffbe6;
+            border: 2px solid #ffe58f;
+            inset: -12px -12px 25px rgba(224, 168, 0, 0.05);
         }
+        #respiratory .system-title { color: #856404; }
+        #respiratory .info-box h3 { color: #a17a06; }
+        #respiratory .info-box ul li::before { background-color: #d4af37; }
 
         #skeletal {
-            box-shadow: 15px 15px 35px #d1d9e6, 
-                        -15px -15px 35px #ffffff, 
-                        inset -12px -12px 25px rgba(85, 239, 196, 0.05), 
-                        inset 12px 12px 25px rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(85, 239, 196, 0.15);
+            background-color: #f6ffed;
+            border: 2px solid #b7eb8f;
+            inset: -12px -12px 25px rgba(76, 175, 80, 0.05);
         }
+        #skeletal .system-title { color: #1e4620; }
+        #skeletal .info-box h3 { color: #2e7d32; }
+        #skeletal .info-box ul li::before { background-color: #4caf50; }
 
         #endocrine {
-            box-shadow: 15px 15px 35px #d1d9e6, 
-                        -15px -15px 35px #ffffff, 
-                        inset -12px -12px 25px rgba(162, 155, 254, 0.05), 
-                        inset 12px 12px 25px rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(162, 155, 254, 0.15);
+            background-color: #fff0f6;
+            border: 2px solid #ffd6e7;
+            inset: -12px -12px 25px rgba(233, 30, 99, 0.05);
         }
+        #endocrine .system-title { color: #721c24; }
+        #endocrine .info-box h3 { color: #c2185b; }
+        #endocrine .info-box ul li::before { background-color: #e91e63; }
 
         .system-title {
             font-size: 2.2rem;
             font-weight: 800;
-            color: #2d3436;
             margin-bottom: 5px;
         }
 
@@ -184,37 +207,36 @@
             }
         }
 
-        /* Claymorphism Image Containers */
         .image-box {
             text-align: center;
-            background-color: #f7fafc;
+            background-color: rgba(255, 255, 255, 0.5);
             padding: 20px;
             border-radius: 30px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: inset 6px 6px 12px #dbecf8, inset -6px -6px 12px #ffffff;
+            box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.06), inset -5px -5px 10px #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
         .image-box img {
             max-width: 100%;
-            height: auto;
+            max-height: 85%;
+            object-fit: contain;
             border-radius: 20px;
-            filter: drop-shadow(4px 6px 10px rgba(0,0,0,0.06));
+            filter: drop-shadow(4px 6px 12px rgba(0,0,0,0.08));
         }
 
         .image-caption {
-            font-size: 0.9rem;
-            color: #718096;
+            font-size: 0.95rem;
+            color: #334155;
             margin-top: 15px;
-            font-weight: 500;
+            font-weight: 600;
         }
 
-        /* Text Layout Styling */
         .info-box h3 {
             font-size: 1.35rem;
-            color: #4a5568;
             margin-bottom: 10px;
             font-weight: 700;
         }
@@ -222,62 +244,67 @@
         .info-box p {
             font-size: 1.05rem;
             line-height: 1.7;
-            color: #4a5568;
+            color: #334155;
             margin-bottom: 25px;
+            font-weight: 500;
         }
 
         .info-box ul {
             list-style: none;
             margin-bottom: 25px;
+            column-width: 200px;
+            column-gap: 25px; 
         }
 
         .info-box ul li {
             position: relative;
             padding-left: 25px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             font-size: 1.02rem;
             line-height: 1.5;
-            color: #4a5568;
+            color: #334155;
+            font-weight: 500;
+            break-inside: avoid;
+            page-break-inside: avoid;
         }
 
         .info-box ul li::before {
             content: "";
             position: absolute;
             left: 0;
-            top: 8px;
-            width: 10px;
-            height: 10px;
-            background-color: #6c5ce7;
+            top: 6px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             box-shadow: inset -1px -1px 3px rgba(0,0,0,0.2), inset 1px 1px 3px #fff;
         }
 
-        /* Claymorphism Fun Fact Alert Panel */
         .fun-fact {
-            background-color: #fffbeb;
+            background-color: rgba(255, 255, 255, 0.7);
             padding: 18px;
             border-radius: 24px;
             font-weight: 600;
-            color: #b45309;
-            box-shadow: inset 4px 4px 10px #fef3c7, inset -4px -4px 10px #ffffff;
-            border: 1px solid rgba(252, 211, 77, 0.4);
+            color: #1e293b;
+            box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.03), 2px 2px 5px rgba(0, 0, 0, 0.02);
+            border: 2px solid rgba(255, 255, 255, 0.8);
             line-height: 1.6;
+            
         }
 
-        /* Claymorphism Embedded Video Wrapper */
         .video-box {
             margin-top: 15px;
-            background-color: #f7fafc;
+            background-color: rgba(255, 255, 255, 0.4);
             border-radius: 30px;
             padding: 25px;
             text-align: center;
-            box-shadow: inset 6px 6px 12px #e2e8f0, inset -6px -6px 12px #ffffff;
+            box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.05), inset -5px -5px 10px #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .video-box h4 {
             font-size: 1.2rem;
             margin-bottom: 15px;
-            color: #2d3748;
+            color: #1e293b;
             font-weight: 700;
         }
 
@@ -287,8 +314,8 @@
             height: 0;
             overflow: hidden;
             border-radius: 20px;
-            box-shadow: 10px 10px 25px rgba(160, 174, 192, 0.4), 
-                        -10px -10px 25px #ffffff;
+            box-shadow: 8px 8px 20px rgba(100, 110, 140, 0.2);
+            border: 2px solid #ffffff;
         }
 
         .video-wrapper iframe {
@@ -315,10 +342,10 @@
 
     <div class="sub-nav-container">
         <div class="sub-nav">
-            <a href="#digestive">Digestive System</a>
-            <a href="#respiratory">Respiratory System</a>
-            <a href="#skeletal">Skeletal System</a>
-            <a href="#endocrine">Endocrine System</a>
+            <a href="#digestive" class="btn-dig">Digestive System</a>
+            <a href="#respiratory" class="btn-resp">Respiratory System</a>
+            <a href="#skeletal" class="btn-skel">Skeletal System</a>
+            <a href="#endocrine" class="btn-endo">Endocrine System</a>
         </div>
     </div>
 
@@ -327,7 +354,7 @@
         <section id="digestive" class="system-card">
             <h2 class="system-title">The Digestive System: Your Fuel Factory</h2>
             <div class="content-layout">
-                <div class="image-box">
+                <div class="image-box" style="height:350px;">
                     <img src="../images/kids digestive system.jpeg" alt="Digestive System Diagram">
                     <p class="image-caption">Look closely at the organs that help crush your food</p>
                 </div>
@@ -337,19 +364,27 @@
                     
                     <h3>Key Parts to Know:</h3>
                     <ul>
-                        <li><strong>Mouth:</strong> Where the chewing party starts.</li>
-                        <li><strong>Esophagus:</strong> The long food pipe slide leading down to your tummy.</li>
-                        <li><strong>Stomach:</strong> A muscular blender that mixes food with special juices.</li>
-                        <li><strong>Small and Large Intestines:</strong> Long tubes that absorb all the good vitamins and water, leaving behind what your body does not need.</li>
+                        <li><strong>Mouth:</strong> The entry gate where your teeth crunch up food and your saliva turns it into a soft mash, making it ready to swallow.</li>
+                        <li><strong>Esophagus:</strong> A long, muscular food slide that gently squeezes your meals down from your mouth straight to your stomach.</li>
+                        <div style="margin-left:-450px;">
+                        <li><strong>Stomach:</strong> A powerful, stretchy blender that sloshes your food around with special juices, turning it into a gooey soup.</li>
+                        <li><strong>Liver:</strong> A massive internal superhero that cleans your blood, processes nutrients, and makes a green juice called bile to break down fats.</li>
+                        <li><strong>Gallbladder:</strong> A little storage balloon that holds onto the liver's green juice until your body needs it to digest a meal.</li>
+                        <li><strong>Pancreas:</strong> A smart organ that makes extra-strong breakdown juices and ensures your body's energy levels stay perfectly balanced.</li>
+                        <li><strong>Small intestine:</strong> A super long, winding tube that absorbs all the awesome vitamins, minerals, and nutrients from your food to help you grow big and strong.</li>
+                        <li><strong>Appendix:</strong> A tiny, finger-sized pouch attached to the large intestine that mostly just hangs out and chills.</li>
+                        <li><strong>Large intestine:</strong> A wider, shorter tube that drinks up the remaining water from your leftovers, packing them together into solid waste.</li>
+                        <li><strong>Rectum:</strong> The very last stop of the digestive highway where waste is safely held until you are ready to visit the bathroom.</li>
+                        </div>
                     </ul>
-                    <div class="fun-fact">Fun Fact: Your small intestine is actually super long. If you stretched it out, it would be about 20 feet long.</div>
+                    <div class="fun-fact" style="margin-left: -450px;">Fun Fact: Your small intestine is actually super long. If you stretched it out, it would be about 20 feet long.</div>
                 </div>
             </div>
 
             <div class="video-box">
                 <h4>Watch and Learn about the Digestive System</h4>
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID_HERE" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/SD8kLAD1jnA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
@@ -358,7 +393,7 @@
         <section id="respiratory" class="system-card">
             <h2 class="system-title">The Respiratory System: The Breath Machine</h2>
             <div class="content-layout">
-                <div class="image-box">
+                <div class="image-box" style="height:560px;">
                     <img src="../images/kids respiratory.jpeg" alt="Respiratory System Diagram">
                     <p class="image-caption">See how the lungs look like two big balloons</p>
                 </div>
@@ -368,19 +403,28 @@
                     
                     <h3>Key Parts to Know:</h3>
                     <ul>
-                        <li><strong>Nasal Cavity and Nostrils:</strong> The front door where air enters and gets warmed up.</li>
-                        <li><strong>Trachea:</strong> Your windpipe. A sturdy tube that carries air down to your chest.</li>
-                        <li><strong>Lungs:</strong> Two spongy, balloon-like organs that fill up with air.</li>
-                        <li><strong>Diaphragm:</strong> A powerful muscle right under your lungs that moves up and down to help you breathe.</li>
+                        <li><strong>Nostril:</strong> The two small front doors on your nose that welcome outside air into your body.</li>
+                        <li><strong>Nasal cavity:</strong> A warm, hidden tunnel inside your nose that cleans, warms, and moistens the air you breathe.</li>
+                        <li><strong>Pharynx:</strong> A shared hallway in your throat where both air from your nose and food from your mouth pass through.</li>
+                        <li><strong>Epiglottis:</strong> A clever little trapdoor that flips shut when you swallow so food goes into your tummy and not your lungs.</li>
+                        <li><strong>Larynx:</strong> Your "voice box" that vibrates like guitar strings to help you talk, sing, and laugh out loud.</li>
+                        <div style="margin-left:-450px;">
+                        <li style="margin-top: 50px;"><strong>Trachea:</strong> Your sturdy "windpipe" that stays open like a rigid straw so air can travel safely down to your chest.</li>
+                        <li><strong>Primary bronchus:</strong> The main branches at the bottom of your windpipe that split the air up, sending it into each lung.</li>
+                        <li><strong>Right lung:</strong> A big, stretchy breathing sponge on your right side that takes oxygen from the air and gives it to your blood.</li>
+                        <li><strong>Left lung:</strong> Your other breathing sponge, which is slightly smaller than the right one to leave a cozy little space for your heart!</li>
+                        <li><strong>Pleural cavity:</strong> A slippery, fluid-filled space around your lungs that lets them expand and shrink smoothly without rubbing.</li>
+                        <li><strong>Diaphragm:</strong> A powerful, dome-shaped muscle under your lungs that flattens out to pull air in and pushes up to squeeze air out.</li>
+                        </div>
                     </ul>
-                    <div class="fun-fact">Fun Fact: Your left lung is slightly smaller than your right lung just to leave a little extra room for your heart.</div>
+                    <div class="fun-fact" style="margin-left: -450px;">Fun Fact: Your left lung is slightly smaller than your right lung just to leave a little extra room for your heart.</div>
                 </div>
             </div>
 
             <div class="video-box">
                 <h4>Watch and Learn how we Breathe</h4>
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID_HERE" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/67Jbbu7UZAA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
@@ -389,7 +433,7 @@
         <section id="skeletal" class="system-card">
             <h2 class="system-title">The Skeletal System: Your Internal Frame</h2>
             <div class="content-layout">
-                <div class="image-box">
+                <div class="image-box" style="height:550px;">
                     <img src="../images/kids skeletal.jpeg" alt="Skeletal System Diagram">
                     <p class="image-caption">Meet Mr. Bones. Check out all the different shapes of bones</p>
                 </div>
@@ -400,19 +444,30 @@
                     <h3>Key Parts to Know:</h3>
                     <ul>
                         <li><strong>Skull:</strong> A super tough bone helmet that protects your brain.</li>
-                        <li><strong>Ribs:</strong> A built-in birdcage of bones protecting your heart and lungs.</li>
-                        <li><strong>Spine:</strong> Your backbone that keeps you straight and helps you bend.</li>
-                        <li><strong>Femur:</strong> Your thigh bone, which is the strongest and longest bone in your entire body.</li>
-                        <li><strong>Phalanges:</strong> The tiny little bones inside your fingers and toes.</li>
+                        <li><strong>Vertebra:</strong> Bony rings that stack up like building blocks to make your backbone flexible.</li>
+                        <li><strong>Rib:</strong> Curved bones that form a protective cage around your heart and lungs.</li>
+                        <li><strong>Spine:</strong> Your body's main support pillar that lets you stand straight, bend, and twist.</li>
+                        <li><strong>Humerus:</strong> The big upper arm bone—often called the "funny bone," even though bumping it isn't funny at all!</li>
+                        <div style="margin-left:-450px;">
+                        <li style="margin-top:40px; ;"><strong>Radius:</strong> The lower arm bone on your thumb's side that helps your wrist rotate.</li>
+                        <li><strong>Ulna:</strong> The lower arm bone next to the radius that creates the pointy tip of your elbow.</li>
+                        <li><strong>Pelvis:</strong> A sturdy, bowl-shaped hip bone that supports your body and helps you sit down.</li>
+                        <li><strong>Sacrum:</strong> A strong, triangular bone at the base of your spine that locks your hips into place.</li>
+                        <li><strong>Femur:</strong> Your thigh bone, which is the longest, heaviest, and strongest bone in your entire body.</li>
+                        <li><strong>Tibia:</strong> Your shin bone, a tough supporter that takes the brunt of the weight when you run and jump.</li>
+                        <li><strong>Tarsus:</strong> A group of ankle bones that give your feet the flexibility to walk, skip, and balance.</li>
+                        <li><strong>Phalanges (Hands):</strong> The flexible little bones in your fingers that let you grip, wave, and play video games.</li>
+                        <li><strong>Phalanges (Feet):</strong> The tiny bones in your toes that help you stay balanced and push off when walking.</li>
+                        </div>
                     </ul>
-                    <div class="fun-fact">Fun Fact: When you were a tiny baby, you had around 300 soft bones. As you grow up, they join together until you have exactly 206 bones.</div>
+                    <div class="fun-fact" style="margin-left: -450px;">Fun Fact: When you were a tiny baby, you had around 300 soft bones. As you grow up, they join together until you have exactly 206 bones.</div>
                 </div>
             </div>
 
             <div class="video-box">
                 <h4>Watch and Learn about your Skeleton</h4>
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID_HERE" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/3MN-M4gsDX0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
@@ -421,7 +476,7 @@
         <section id="endocrine" class="system-card">
             <h2 class="system-title">The Endocrine System: Secret Messengers</h2>
             <div class="content-layout">
-                <div class="image-box">
+                <div class="image-box" style="height:550px;">
                     <img src="../images/kids endocrine.jpeg" alt="Endocrine System Diagram">
                     <p class="image-caption">These tiny glands are hidden all over your body</p>
                 </div>
@@ -431,19 +486,26 @@
                     
                     <h3>Key Parts to Know:</h3>
                     <ul>
-                        <li><strong>Hypothalamus and Pituitary Gland:</strong> Located in your head, these are the bosses that tell the other glands what to do.</li>
-                        <li><strong>Pineal Gland:</strong> Helps control your internal clock so you get sleepy at bedtime.</li>
-                        <li><strong>Thyroid Gland:</strong> Shaped like a little butterfly in your neck, it controls how fast your body uses energy.</li>
-                        <li><strong>Adrenal Glands:</strong> Sit right on top of your kidneys and help you out when you feel startled or super active.</li>
+                        <li><strong>Hypothalamus:</strong> The brain's control center that acts like a smart thermostat, keeping your body temperature, hunger, and sleep perfectly balanced.</li>
+                        <li><strong>Pineal Gland:</strong> A tiny gland that works like a natural alarm clock, making a special hormone to help you drift off to sleep at night.</li>
+                        <li><strong>Pituitary Gland:</strong> The "Master Gland"—even though it's only the size of a pea, it tells other glands what to do and releases growth hormones to help you get taller.</li>
+                        <div style="margin-left:-450px;">
+                        <li style="margin-top: 70px;"><strong>Thyroid Gland:</strong> A butterfly-shaped gland in your neck that controls how fast your body burns energy from the food you eat.</li>
+                        <li><strong>Thymus Gland:</strong> A special training camp for your immune system that helps your body build up a strong defense against pesky germs.</li>
+                        <li><strong>Adrenal Glands:</strong> Fun little "hats" sitting on top of your kidneys that pump out adrenaline to give you a quick burst of super energy when you're excited or scared.</li>
+                        <li><strong>Pancreas:</strong> A hardworking organ that regulates your blood sugar levels, ensuring your body has a steady supply of fuel throughout the day.</li>
+                        <li><strong>Ovary Glands (Female):</strong> Special glands in girls that produce hormones to help their bodies grow and change as they get older.</li>
+                        <li><strong>Testis (Male):</strong> Special glands in boys that produce hormones to help their bodies grow stronger and change as they get older.</li>
+                        </div>
                     </ul>
-                    <div class="fun-fact">Fun Fact: Your Pituitary gland is only about the size of a tiny green pea, but it is called the Master Gland because it controls so much.</div>
+                    <div class="fun-fact" style="margin-left: -450px;">Fun Fact: Your Pituitary gland is only about the size of a tiny green pea, but it is called the Master Gland because it controls so much.</div>
                 </div>
             </div>
 
             <div class="video-box">
                 <h4>Watch and Learn about Hormones and Glands</h4>
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID_HERE" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/2eKWTEV4bi4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
