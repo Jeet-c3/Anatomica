@@ -9,14 +9,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🎨 DUAL-TONE DICTIONARY: Set background (bg) and foreground (fg) colors
   function getTransitionColors(url) {
     if (url.includes("about.html")) return { bg: "#e0e7ff", fg: "#a3a5ff" };
-    if (url.includes("level1")) return { bg: "#ff6cf3e9", fg: "#afcdf2" };
-    if (url.includes("level2")) return { bg: "#d8d9d7", fg: "#222939" };
+    if (url.includes("level1/index.html")) return { bg: "#ff6cf3e9", fg: "#ffffff" };
+    if (url.includes("level2/index.html")) return { bg: "#f0ffe0", fg: "#222939" };
     if (url.includes("gallery.html")) return { bg: "#e0e7ff", fg: "#a3a5ff" };
     if (url.includes("profile.html")) return { bg: "#ffffff", fg: "#b6cef1" };
-    if (url.includes("index.html")) return { bg: "#d5f556", fg: "#2764fd" };
+    // if (url.includes("index.html")) return { bg: "#d5f556", fg: "#2764fd" };
+    if (url.includes("quiz/index.html")) return { bg: "#ffffff", fg: "#2764fd" };
     
     // Default fallback (Matches the exact colors from your inspiration file)
-    return { bg: "#d8d9d7", fg: "#6e44ff" }; 
+    return { bg: "#f3ffe6", fg: "#6e44ff" }; 
   }
 
   // 1. Setup Initial State (Matches the end state of a "cover" animation)
