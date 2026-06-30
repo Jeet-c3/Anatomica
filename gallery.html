@@ -34,7 +34,9 @@
             width: 100%;
             height: 100%;
             z-index: 2000;
-            background: linear-gradient(135deg, #4848a1 0%, #a3a5ff 100%);
+            background: linear-gradient(-45deg, #a3a5ff, #8ec6fc, #dec4ff, #ffb6c1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -42,6 +44,12 @@
             text-align: center;
             padding: 0 5vw;
             transition: opacity 1.4s cubic-bezier(0.23, 1, 0.32, 1), transform 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         #landing.hidden {
@@ -351,7 +359,24 @@
             pointer-events: none;
             cursor: not-allowed;
         }
-    </style>
+        #Level1 {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+        }
+
+        #Level2 {
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+        }
+
+        #Level3 {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+        }
+
+        .clay-btn span {
+            color: #1e293b;
+            font-size: 20px;
+            font-weight: 800;
+        }
+            </style>
 </head>
 <body>
 
@@ -369,18 +394,18 @@
     <h2>Explore The Human Body</h2>
     <p>Understand muscles, bones, organs &amp; systems — interactive learning made beautiful</p>
     <div class="bobber">
-        <a href="level1/index.html" class="clay-btn" id="Level1" style="background-color: #8a8af4; text-decoration: none;">Level 1 →
-            <span style="color: snow;font-size: 20px;">Anatomy for Kids</span>
-        </a>
-        
-        <a href="level2/index.html" class="clay-btn" id="Level2" style="background-color: rgb(250, 119, 119); text-decoration: none;">Level 2 →
-            <span style="color: snow;font-size: 20px;" id="l2-text">Anatomy for High Schoolers</span>
-        </a>
+    <a href="level1/index.html" class="clay-btn" id="Level1">Level 1 →
+        <span>Anatomy for Kids</span>
+    </a>
+    
+    <a href="level2/index.html" class="clay-btn" id="Level2">Level 2 →
+        <span id="l2-text">Anatomy for High Schoolers</span>
+    </a>
 
-        <button onclick="startGallery(3)" class="clay-btn" id="Level3" style="background-color: #fb71fb;">Level 3 →
-            <span style="color: snow;font-size: 20px;" id="l3-text">Anatomy in Full Details</span>
-        </button>
-    </div>
+    <button onclick="startGallery(3)" class="clay-btn" id="Level3">Level 3 →
+        <span id="l3-text">Anatomy in Full Details</span>
+    </button>
+</div>
 </div>
 
 <div id="canvas-container"></div>
@@ -492,44 +517,13 @@
 </div>
 
 <div class="scroll-hint" style="color: #000;font-weight: bold;">Scroll or drag to explore the systems ↓</div>
-<!-- 
-<div class="transition-svg" aria-hidden="true">
-    <svg
-        viewBox="0 0 2453 2535"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-    >
-        <path
-            d="M227.549 1818.76C227.549 1818.76 406.016 2207.75 569.049 2130.26C843.431 1999.85 -264.104 1002.3 227.549 876.262C552.918 792.849 773.647 2456.11 1342.05 2130.26C1885.43 1818.76 14.9644 455.772 760.548 137.262C1342.05 -111.152 1663.5 2266.35 2209.55 1972.76C2755.6 1679.18 1536.63 384.467 1826.55 137.262C2013.5 -22.1463 2209.55 381.262 2209.55 381.262"
-            stroke="#ffffff"
-            stroke-width="550"
-            stroke-linecap="round"
-        />
-        <path
-            d="M1661.28 2255.51C1661.28 2255.51 2311.09 1960.37 2111.78 1817.01C1944.47 1696.67 718.456 2870.17 499.781 2255.51C308.969 1719.17 2457.51 1613.83 2111.78 963.512C1766.05 313.198 427.949 2195.17 132.281 1455.51C-155.219 736.292 2014.78 891.514 1708.78 252.012C1437.81 -314.29 369.471 909.169 132.281 566.512C18.1772 401.672 244.781 193.012 244.781 193.012"
-            stroke="#ffffff"
-            stroke-width="550"
-            stroke-linecap="round"
-        />
-    </svg>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="transition.js"></script> -->
-
-
-
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script type="module">
-    // Import modern Modular Firebase SDKs (v12 compatible)
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
     import { getDatabase, ref, set, get, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
 
-    // Your provided configuration credentials
     const firebaseConfig = {
         apiKey: "AIzaSyCdUjgwGXTo3cx-UlhnZM3apHwdG1bVDhA",
         authDomain: "anatomica-e2810.firebaseapp.com",
@@ -541,7 +535,6 @@
         measurementId: "G-VNWH1TBBS5"
     };
 
-    // Initialize core Firebase services
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getDatabase(app);
@@ -807,7 +800,6 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // This smart version handles BOTH Email/Password and Google Sign-In flawlessly
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
         alert("Please login first.");
@@ -817,26 +809,20 @@ onAuthStateChanged(auth, async (user) => {
 
     let profileData = null;
 
-    // 1. TRY THE ORIGINAL EMAIL LOGIN PATH FIRST
-    // Looks for usernames/emails saved by index.html in your browser memory
     const legacyCurrentUser = localStorage.getItem('currentUser');
     if (legacyCurrentUser) {
         profileData = JSON.parse(localStorage.getItem('user_' + legacyCurrentUser));
     }
 
-    // 2. TRY THE GOOGLE LOGIN PATH (Using Firebase UID)
     if (!profileData) {
         profileData = JSON.parse(localStorage.getItem('user_' + user.uid));
     }
 
-    // 3. DATABASE FALLBACK (If browser memory was cleared or empty)
     if (!profileData) {
         try {
-            // Search the database by unique Firebase UID
             let userRef = ref(db, 'users/' + user.uid);
             let snapshot = await get(userRef);
             
-            // If not found by UID, search the database by Email address
             if (!snapshot.exists() && user.email) {
                 const userQuery = query(ref(db, 'users'), orderByChild('email'), equalTo(user.email));
                 const querySnapshot = await get(userQuery);
@@ -850,7 +836,6 @@ onAuthStateChanged(auth, async (user) => {
             }
 
             if (profileData) {
-                // Cache it locally so it loads instantly on the next page refresh
                 localStorage.setItem('currentUser', user.uid);
                 localStorage.setItem('user_' + user.uid, JSON.stringify(profileData));
             }
@@ -859,14 +844,12 @@ onAuthStateChanged(auth, async (user) => {
         }
     }
 
-    // 4. VERIFY DATA AND INITIALIZE 3D CANVAS
     if (profileData) {
         currentUserData = profileData; 
         applyLevelLocks(); 
         initThree();       
         animateGallery();
     } else {
-        // Only trigger this if the account genuinely doesn't exist anywhere
         alert("Profile setup incomplete. Redirecting to login/registration...");
         window.location.href = 'index.html';
     }

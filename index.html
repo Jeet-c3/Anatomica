@@ -375,7 +375,6 @@
         }
     }
 
-    // UI & Character Animation Eye-Tracking Logic
     const illustration = document.getElementById('illustration');
     const passInput = document.getElementById('passInput');                     
     const toggleShow = document.getElementById('toggleShow');
@@ -412,7 +411,6 @@
         });
     });
 
-    // Custom Interactive Tab Switching Layout Routing
     const tabLogin = document.getElementById('tabLogin');
     const tabSignup = document.getElementById('tabSignup');
     const formTagline = document.getElementById('formTagline');
@@ -440,7 +438,6 @@
         rememberOptionRow.style.visibility = "hidden";
     });
 
-    // Forgot Password Trigger Logic Workflow Linker
     document.getElementById('forgotPassBtn').addEventListener('click', async (e) => {
         e.preventDefault();
         clearBannerMessage('login');
@@ -459,7 +456,6 @@
         }
     });
 
-    // Form Handling Global State Variables
     const loginForm = document.getElementById('loginForm');
     const setupForm = document.getElementById('setupForm');
     let tempEmail = "";
@@ -469,7 +465,6 @@
 
     document.getElementById('dobInput').max = new Date().toISOString().split("T")[0];
 
-    // Unified Authentication Router Execution Block
     loginForm.addEventListener('submit', async function(event) {
         event.preventDefault();
         clearBannerMessage('login');
@@ -477,19 +472,17 @@
         tempPassword = document.getElementById('passInput').value;
 
         if (currentAuthMode === "login") {
-            // LOG IN FLOW
             try {
                 const userCredential = await signInWithEmailAndPassword(auth, tempEmail, tempPassword);
                 const user = userCredential.user;
 
-                // Check database to verify profile completeness
                 const snapshot = await get(ref(db, 'users/' + user.uid));
                 if (snapshot.exists()) {
                     localStorage.setItem('currentUser', tempEmail);
                     if (window.playTransitionAndRedirect) {
     window.playTransitionAndRedirect("gallery.html");
 } else {
-    window.location.href = "gallery.html"; // Fallback
+    window.location.href = "gallery.html";
 } 
                 } else {
                     isGoogleUser = false;
@@ -500,28 +493,21 @@
                 showBannerMessage('login', parseFirebaseError(error.code));
             }
         } else {
-            // SIGN UP FLOW: Proactive Validation Check runs immediately!
             if (tempPassword.length < 6) {
                 showBannerMessage('login', "Password is too short. Firebase requires at least 6 characters.");
                 return;
             }
 
             try {
-                // Attempt creation instantly before switching to the profile metadata form
                 const userCredential = await createUserWithEmailAndPassword(auth, tempEmail, tempPassword);
-                
-                // If it succeeds, the account is clean. Advance instantly to page 2.
                 isGoogleUser = false;
                 loginForm.style.display = 'none';
                 setupForm.style.display = 'flex';
             } catch (error) {
-                // If email already exists, it is flagged immediately on page 1
                 showBannerMessage('login', parseFirebaseError(error.code));
             }
         }
     });
-
-    // Profile Generation Metadata Form Submission Handler
     setupForm.addEventListener('submit', async function(event) {
         event.preventDefault();
         clearBannerMessage('setup');
@@ -543,7 +529,6 @@
         const username = `@${name.split(" ")[0].toLowerCase()}${birthDate.getFullYear()}_${randomDigits}`;
         
         try {
-            // Retrieve current target UID safely
             let uid = isGoogleUser ? googleUid : (auth.currentUser ? auth.currentUser.uid : "");
 
             if (!uid) {
@@ -563,22 +548,18 @@
                 dobLocked: false
             };
 
-            // Write user details to Realtime Database storage node reference
             await set(ref(db, 'users/' + uid), newProfile);
             localStorage.setItem('currentUser', tempEmail);
-            
-            // Navigate cleanly to main gallery
             if (window.playTransitionAndRedirect) {
     window.playTransitionAndRedirect("gallery.html");
 } else {
-    window.location.href = "gallery.html"; // Fallback
+    window.location.href = "gallery.html";
 }  
         } catch (error) {
             showBannerMessage('setup', "Failed to build database profile: " + error.message);
         }
     });
 
-    // Google Federated Authentication Endpoint
     const googleBtn = document.querySelector('.btn-google');
     googleBtn.addEventListener('click', async () => {
         clearBannerMessage('login');
@@ -592,7 +573,7 @@
                 if (window.playTransitionAndRedirect) {
     window.playTransitionAndRedirect("gallery.html");
 } else {
-    window.location.href = "gallery.html"; // Fallback
+    window.location.href = "gallery.html";
 }
             } else {
                 isGoogleUser = true;
@@ -611,7 +592,6 @@
         }
     });
 
-    // GitHub Federated Authentication Endpoint
     const githubBtn = document.querySelector('.btn-github');
     githubBtn.addEventListener('click', async () => {
         clearBannerMessage('login');
@@ -625,7 +605,7 @@
                 if (window.playTransitionAndRedirect) {
     window.playTransitionAndRedirect("gallery.html");
 } else {
-    window.location.href = "gallery.html"; // Fallback
+    window.location.href = "gallery.html"; 
 }
             } else {
                 isGoogleUser = true;

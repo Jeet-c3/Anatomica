@@ -206,7 +206,6 @@
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
     import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
 
-    // Application Sync Configuration
     const firebaseConfig = {
         apiKey: "AIzaSyCdUjgwGXTo3cx-UlhnZM3apHwdG1bVDhA",
         authDomain: "anatomica-e2810.firebaseapp.com",
@@ -238,13 +237,11 @@
         return age;
     }
 
-    // Active session monitoring daemon
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             currentUserUid = user.uid;
             await loadProfileData(user.uid);
         } else {
-            // Fallback checking framework
             const legacyEmail = localStorage.getItem('currentUser');
             if (!legacyEmail) {
                 alert("No logged in session verified.");
@@ -253,7 +250,6 @@
         }
     });
 
-    // Realtime Database parsing routine
     async function loadProfileData(uid) {
         try {
             const userRef = ref(db, 'users/' + uid);
@@ -292,7 +288,6 @@
         }
     }
 
-    // Canvas asset packaging method 
     function uploadProfileImage(event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -387,7 +382,6 @@
         }
     }
 
-    // Core module interface exposure to HTML Context
     window.editName = editName;
     window.editDob = editDob;
     window.hideModal = hideModal;
